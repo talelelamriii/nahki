@@ -1,6 +1,9 @@
 <header class="haut">
   <h1>Réglages</h1>
-  <p class="muted">Adaptez le tableau à votre enfant. Les changements s'appliquent tout de suite et restent sur cet appareil.</p>
+  <p class="muted">
+    Adaptez le tableau à votre enfant. Les changements s'appliquent tout de suite et restent sur cet
+    appareil.
+  </p>
 </header>
 
 <div class="sections">
@@ -9,7 +12,13 @@
     <div class="tailles" role="radiogroup" aria-labelledby="titre-taille">
       @for (t of tailles; track t.id) {
         <label class="taille" [class.taille--choisie]="reglages.valeurs().taille === t.id">
-          <input type="radio" name="taille" [value]="t.id" [checked]="reglages.valeurs().taille === t.id" (change)="reglages.modifier({ taille: t.id })" />
+          <input
+            type="radio"
+            name="taille"
+            [value]="t.id"
+            [checked]="reglages.valeurs().taille === t.id"
+            (change)="reglages.modifier({ taille: t.id })"
+          />
           <span class="taille__icone taille__icone--{{ t.id }}" aria-hidden="true"></span>
           <strong>{{ t.libelle }}</strong>
           <span class="section__aide">{{ t.aide }}</span>
@@ -22,7 +31,9 @@
       @for (p of apercu(); track p.id) {
         <app-picto-card [picto]="p" [arabe]="reglages.valeurs().arabe" [decorative]="true" />
       } @empty {
-        @for (i of [1, 2, 3]; track i) { <div class="skeleton apercu__vide"></div> }
+        @for (i of [1, 2, 3]; track i) {
+          <div class="skeleton apercu__vide"></div>
+        }
       }
     </div>
   </section>
@@ -31,10 +42,17 @@
     <div class="ligne-reglage">
       <div class="ligne-reglage__texte">
         <strong>Afficher le mot en arabe</strong>
-        <span class="section__aide">Sous le mot en lettres latines, quand il existe (par exemple « nekol » et « ناكل »).</span>
+        <span class="section__aide"
+          >Sous le mot en lettres latines, quand il existe (par exemple « nekol » et « ناكل
+          »).</span
+        >
       </div>
       <label class="interrupteur">
-        <input type="checkbox" [checked]="reglages.valeurs().arabe" (change)="reglages.modifier({ arabe: !reglages.valeurs().arabe })" />
+        <input
+          type="checkbox"
+          [checked]="reglages.valeurs().arabe"
+          (change)="reglages.modifier({ arabe: !reglages.valeurs().arabe })"
+        />
         <span class="interrupteur__piste" aria-hidden="true"></span>
         <span class="interrupteur__texte">{{ reglages.valeurs().arabe ? 'Oui' : 'Non' }}</span>
         <span class="sr-only">Afficher le mot en arabe</span>
@@ -46,12 +64,20 @@
     <div class="ligne-reglage">
       <div class="ligne-reglage__texte">
         <strong>Dire le mot au toucher</strong>
-        <span class="section__aide">Désactivé, le tableau ne parle qu'au moment de lire toute la phrase (bouton vert).</span>
+        <span class="section__aide"
+          >Désactivé, le tableau ne parle qu'au moment de lire toute la phrase (bouton vert).</span
+        >
       </div>
       <label class="interrupteur">
-        <input type="checkbox" [checked]="reglages.valeurs().direAuToucher" (change)="reglages.modifier({ direAuToucher: !reglages.valeurs().direAuToucher })" />
+        <input
+          type="checkbox"
+          [checked]="reglages.valeurs().direAuToucher"
+          (change)="reglages.modifier({ direAuToucher: !reglages.valeurs().direAuToucher })"
+        />
         <span class="interrupteur__piste" aria-hidden="true"></span>
-        <span class="interrupteur__texte">{{ reglages.valeurs().direAuToucher ? 'Oui' : 'Non' }}</span>
+        <span class="interrupteur__texte">{{
+          reglages.valeurs().direAuToucher ? 'Oui' : 'Non'
+        }}</span>
         <span class="sr-only">Dire le mot au toucher</span>
       </label>
     </div>
@@ -61,17 +87,27 @@
     <label class="ligne-reglage">
       <span class="ligne-reglage__texte">
         <strong>Longueur maximale de la phrase</strong>
-        <span class="section__aide">Commencez court (4 pictos) pour un enfant qui découvre les phrases.</span>
+        <span class="section__aide"
+          >Commencez court (4 pictos) pour un enfant qui découvre les phrases.</span
+        >
       </span>
-      <select class="field__input longueur" [value]="reglages.valeurs().longueurPhrase" (change)="reglages.modifier({ longueurPhrase: +$any($event.target).value })">
+      <select
+        class="field__input longueur"
+        [value]="reglages.valeurs().longueurPhrase"
+        (change)="reglages.modifier({ longueurPhrase: +$any($event.target).value })"
+      >
         @for (n of longueurs; track n) {
-          <option [value]="n" [selected]="reglages.valeurs().longueurPhrase === n">{{ n }} pictos</option>
+          <option [value]="n" [selected]="reglages.valeurs().longueurPhrase === n">
+            {{ n }} pictos
+          </option>
         }
       </select>
     </label>
   </section>
 
   <div class="actions">
-    <button type="button" class="btn" (click)="reinitialiser()">Rétablir les réglages par défaut</button>
+    <button type="button" class="btn" (click)="reinitialiser()">
+      Rétablir les réglages par défaut
+    </button>
   </div>
 </div>

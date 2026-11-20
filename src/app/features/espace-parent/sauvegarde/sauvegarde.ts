@@ -68,10 +68,16 @@ export class Sauvegarde implements OnInit {
       const r = await this.sauvegarde.importer(fichier);
       this.resultat.set(r);
       this.nombre.set(await this.sauvegarde.compter());
-      this.toast.succes(r.ajoutes ? `${r.ajoutes} picto${r.ajoutes > 1 ? 's' : ''} restauré${r.ajoutes > 1 ? 's' : ''}.` : 'Aucun nouveau picto à restaurer.');
+      this.toast.succes(
+        r.ajoutes
+          ? `${r.ajoutes} picto${r.ajoutes > 1 ? 's' : ''} restauré${r.ajoutes > 1 ? 's' : ''}.`
+          : 'Aucun nouveau picto à restaurer.',
+      );
     } catch (e) {
       console.error('Import :', e);
-      this.erreur.set(e instanceof Error && e.message ? e.message : "Le fichier n'a pas pu être lu.");
+      this.erreur.set(
+        e instanceof Error && e.message ? e.message : "Le fichier n'a pas pu être lu.",
+      );
     } finally {
       this.enCours.set(null);
     }

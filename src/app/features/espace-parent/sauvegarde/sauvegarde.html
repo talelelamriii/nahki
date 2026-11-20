@@ -1,8 +1,8 @@
 <header class="haut">
   <h1>Sauvegarde</h1>
   <p class="muted">
-    Vos photos et vos voix sont gardées seulement sur cet appareil. Faites une sauvegarde avant de changer de tablette
-    ou d'effacer les données du navigateur.
+    Vos photos et vos voix sont gardées seulement sur cet appareil. Faites une sauvegarde avant de
+    changer de tablette ou d'effacer les données du navigateur.
   </p>
 </header>
 
@@ -13,19 +13,31 @@
       @if (nombre() === null) {
         <span class="skeleton compte-squelette"></span>
       } @else {
-        <strong>{{ nombre() }} picto{{ nombre()! > 1 ? 's' : '' }} de la famille</strong>, avec leurs photos et leurs voix,
-        ainsi que vos réglages et les pictos masqués.
+        <strong>{{ nombre() }} picto{{ nombre()! > 1 ? 's' : '' }} de la famille</strong>, avec
+        leurs photos et leurs voix, ainsi que vos réglages et les pictos masqués.
       }
     </p>
     <div class="actions">
-      <button type="button" class="btn btn--primary" (click)="exporter()" [disabled]="enCours() !== null || nombre() === 0">
-        @if (enCours() === 'export') { <span class="spinner" aria-hidden="true"></span> Préparation… } @else { ⇩ Télécharger la sauvegarde }
+      <button
+        type="button"
+        class="btn btn--primary"
+        (click)="exporter()"
+        [disabled]="enCours() !== null || nombre() === 0"
+      >
+        @if (enCours() === 'export') {
+          <span class="spinner" aria-hidden="true"></span> Préparation…
+        } @else {
+          ⇩ Télécharger la sauvegarde
+        }
       </button>
       @if (nombre() === 0) {
         <span class="section__aide">Ajoutez d'abord un picto avec une photo de la maison.</span>
       }
     </div>
-    <p class="section__aide">Le fichier (.json) reste privé : gardez-le sur votre ordinateur, une clé USB ou votre messagerie.</p>
+    <p class="section__aide">
+      Le fichier (.json) reste privé : gardez-le sur votre ordinateur, une clé USB ou votre
+      messagerie.
+    </p>
   </section>
 
   <section class="card section" aria-labelledby="titre-import">
@@ -38,7 +50,12 @@
       (dragleave)="survoler($event, false)"
       (drop)="deposer($event)"
     >
-      <input type="file" accept=".json,application/json" (change)="choisir($event)" [disabled]="enCours() !== null" />
+      <input
+        type="file"
+        accept=".json,application/json"
+        (change)="choisir($event)"
+        [disabled]="enCours() !== null"
+      />
       @if (enCours() === 'import') {
         <span class="spinner" aria-hidden="true"></span>
         <strong>Restauration en cours…</strong>
@@ -48,7 +65,9 @@
         <span class="section__aide">ou le glisser ici</span>
       }
     </label>
-    <p class="section__aide">Les pictos déjà présents sur cet appareil ne sont pas remplacés : rien n'est effacé.</p>
+    <p class="section__aide">
+      Les pictos déjà présents sur cet appareil ne sont pas remplacés : rien n'est effacé.
+    </p>
 
     <div aria-live="polite">
       @if (erreur(); as e) {
@@ -57,8 +76,12 @@
       @if (resultat(); as r) {
         <p class="succes apparition">
           {{ r.ajoutes }} picto{{ r.ajoutes > 1 ? 's' : '' }} restauré{{ r.ajoutes > 1 ? 's' : '' }}
-          @if (r.dejaPresents) { · {{ r.dejaPresents }} déjà présent{{ r.dejaPresents > 1 ? 's' : '' }} }
-          @if (r.ignores) { · {{ r.ignores }} illisible{{ r.ignores > 1 ? 's' : '' }} }
+          @if (r.dejaPresents) {
+            · {{ r.dejaPresents }} déjà présent{{ r.dejaPresents > 1 ? 's' : '' }}
+          }
+          @if (r.ignores) {
+            · {{ r.ignores }} illisible{{ r.ignores > 1 ? 's' : '' }}
+          }
         </p>
       }
     </div>

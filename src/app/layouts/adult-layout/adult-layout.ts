@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { ToastService } from '../../core/services/toast.service';
@@ -16,6 +16,8 @@ export class AdultLayout {
   private readonly toast = inject(ToastService);
 
   protected readonly annee = new Date().getFullYear();
+  /** Menu burger (smartphone) ouvert ou fermé. */
+  protected readonly menuOuvert = signal(false);
   protected readonly liens = [
     { url: '/', libelle: 'Accueil', exact: true },
     { url: '/tableau', libelle: 'Tableau', exact: false },

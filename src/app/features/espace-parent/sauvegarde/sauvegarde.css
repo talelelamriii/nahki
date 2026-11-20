@@ -1,13 +1,47 @@
-.compte-squelette { display: inline-block; width: 260px; height: 20px; vertical-align: middle; }
+.compte-squelette {
+  display: inline-block;
+  width: 260px;
+  height: 20px;
+  vertical-align: middle;
+}
 
 .depot {
-  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-  min-height: 140px; padding: var(--space-6); text-align: center; cursor: pointer;
-  border: 3px dashed var(--line-strong); border-radius: var(--radius-lg); background: var(--surface);
-  transition: border-color 0.15s ease, background-color 0.15s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 140px;
+  padding: var(--space-6);
+  text-align: center;
+  cursor: pointer;
+  border: 3px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
 }
-.depot:hover, .depot--survol { border-color: var(--ink); background: var(--card); }
-.depot--occupe { cursor: progress; }
-.depot:has(input:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
-.depot input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-.depot__icone { font-size: 32px; line-height: 1; }
+.depot:hover,
+.depot--survol {
+  border-color: var(--ink);
+  background: var(--card);
+}
+.depot--occupe {
+  cursor: progress;
+}
+.depot:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+.depot input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.depot__icone {
+  font-size: 32px;
+  line-height: 1;
+}

@@ -56,8 +56,12 @@ export class AuthService {
     await this.mettreAJour(data.session);
     this.supabase.client.auth.onAuthStateChange((_evenement: AuthChangeEvent, session: Session | null) => {
       // Rafraîchissement du jeton, déconnexion dans un autre onglet…
-      if (session?.user.id !== this.session()?.user.id) this.mettreAJour(session);
-      else this.session.set(session);
+      // setTimeout : Supabase recommande de ne pas appeler la base DANS ce rappel. Pendant une inscription,
+      // la requête du profil attendrait la fin de l'inscription, qui attend elle-même ce rappel (blocage).
+      setTimeout(() => {
+        if (session?.user.id !== this.session()?.user.id) void this.mettreAJour(session);
+        else this.session.set(session);
+      });
     });
   }
 

@@ -3,9 +3,27 @@
     <span class="logo__latin">Nahki</span>
     <span class="logo__arabe" lang="ar">نحكي</span>
   </a>
-  <nav class="nav" aria-label="Navigation principale">
+  <button
+    type="button"
+    class="burger"
+    [attr.aria-expanded]="menuOuvert()"
+    aria-controls="nav-principale"
+    (click)="menuOuvert.set(!menuOuvert())"
+  >
+    <span class="burger__barres" aria-hidden="true"></span>
+    <span class="sr-only">{{ menuOuvert() ? 'Fermer le menu' : 'Ouvrir le menu' }}</span>
+  </button>
+
+  <nav id="nav-principale" class="nav" [class.nav--ouverte]="menuOuvert()" aria-label="Navigation principale">
     @for (l of liens; track l.url) {
-      <a [routerLink]="l.url" routerLinkActive="nav__lien--actif" [routerLinkActiveOptions]="{ exact: l.exact }" class="nav__lien">{{ l.libelle }}</a>
+      <a
+        [routerLink]="l.url"
+        routerLinkActive="nav__lien--actif"
+        [routerLinkActiveOptions]="{ exact: l.exact }"
+        class="nav__lien"
+        (click)="menuOuvert.set(false)"
+        >{{ l.libelle }}</a
+      >
     }
   </nav>
 

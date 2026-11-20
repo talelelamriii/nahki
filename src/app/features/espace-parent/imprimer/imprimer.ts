@@ -17,7 +17,9 @@ export class Imprimer implements OnInit {
   protected readonly reglages = inject(ReglagesService);
 
   protected readonly categories = CATEGORIES;
-  protected readonly choisies = signal<ReadonlySet<CategorieId>>(new Set(CATEGORIES.map((c) => c.id)));
+  protected readonly choisies = signal<ReadonlySet<CategorieId>>(
+    new Set(CATEGORIES.map((c) => c.id)),
+  );
   protected readonly colonnes = signal(4);
   protected readonly arabe = signal(this.reglages.valeurs().arabe);
   protected readonly erreur = signal(false);
@@ -25,10 +27,15 @@ export class Imprimer implements OnInit {
   /** Les pictos visibles, regroupés par catégorie choisie (les catégories vides sont omises). */
   protected readonly groupes = computed(() =>
     CATEGORIES.filter((c) => this.choisies().has(c.id))
-      .map((c) => ({ categorie: c, pictos: this.pictos.visibles().filter((p) => p.categorie === c.id) }))
+      .map((c) => ({
+        categorie: c,
+        pictos: this.pictos.visibles().filter((p) => p.categorie === c.id),
+      }))
       .filter((g) => g.pictos.length > 0),
   );
-  protected readonly total = computed(() => this.groupes().reduce((n, g) => n + g.pictos.length, 0));
+  protected readonly total = computed(() =>
+    this.groupes().reduce((n, g) => n + g.pictos.length, 0),
+  );
 
   ngOnInit(): void {
     this.pictos.charger().catch(() => this.erreur.set(true));

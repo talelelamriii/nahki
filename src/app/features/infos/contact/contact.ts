@@ -51,7 +51,7 @@ export class Contact {
     const lien = `mailto:${EMAIL_CONTACT}?subject=${encodeURIComponent('[Nahki] ' + sujet)}&body=${encodeURIComponent(corps)}`;
     window.location.href = lien;
     this.envoye.set(true);
-    this.toast.succes('Votre messagerie s\'ouvre avec le message prêt à envoyer.');
+    this.toast.succes("Votre messagerie s'ouvre avec le message prêt à envoyer.");
   }
 
   protected recommencer(): void {

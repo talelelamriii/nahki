@@ -79,7 +79,8 @@ export class SauvegardeService {
    * Lève une erreur avec un message lisible si le fichier n'est pas une sauvegarde Nahki.
    */
   async importer(fichier: File): Promise<ResultatImport> {
-    if (fichier.size > TAILLE_MAX) throw new Error('Ce fichier est trop volumineux (plus de 100 Mo).');
+    if (fichier.size > TAILLE_MAX)
+      throw new Error('Ce fichier est trop volumineux (plus de 100 Mo).');
     let donnees: Partial<FichierSauvegarde>;
     try {
       donnees = JSON.parse(await fichier.text());
@@ -89,7 +90,8 @@ export class SauvegardeService {
     if (donnees?.application !== 'nahki' || !Array.isArray(donnees.pictos)) {
       throw new Error("Ce fichier n'est pas une sauvegarde Nahki.");
     }
-    if (donnees.version !== 1) throw new Error('Cette sauvegarde vient d\'une version de Nahki plus récente.');
+    if (donnees.version !== 1)
+      throw new Error("Cette sauvegarde vient d'une version de Nahki plus récente.");
 
     const resultat: ResultatImport = { ajoutes: 0, dejaPresents: 0, ignores: 0 };
     for (const p of donnees.pictos) {
@@ -101,17 +103,26 @@ export class SauvegardeService {
       if (await this.pictos.restaurer(picto)) resultat.ajoutes++;
       else resultat.dejaPresents++;
     }
-    if (Array.isArray(donnees.masques)) this.pictos.fusionnerMasques(donnees.masques.filter((m) => typeof m === 'string'));
+    if (Array.isArray(donnees.masques))
+      this.pictos.fusionnerMasques(donnees.masques.filter((m) => typeof m === 'string'));
     if (donnees.reglages) this.reglages.modifier(valider(donnees.reglages));
     return resultat;
   }
 }
 
 /** Vérifie un picto du fichier et le remet sous la forme enregistrée dans IndexedDB. */
-async function versPictoFamille(p: FichierSauvegarde['pictos'][number]): Promise<PictoFamille | null> {
+async function versPictoFamille(
+  p: FichierSauvegarde['pictos'][number],
+): Promise<PictoFamille | null> {
   const valide =
-    p && typeof p.id === 'string' && typeof p.mot === 'string' && p.mot.trim().length > 0 && p.mot.length <= 24 &&
-    CATEGORIES_VALIDES.has(p.categorie) && typeof p.image === 'string' && p.image.startsWith('data:image/') &&
+    p &&
+    typeof p.id === 'string' &&
+    typeof p.mot === 'string' &&
+    p.mot.trim().length > 0 &&
+    p.mot.length <= 24 &&
+    CATEGORIES_VALIDES.has(p.categorie) &&
+    typeof p.image === 'string' &&
+    p.image.startsWith('data:image/') &&
     (p.son === undefined || (typeof p.son === 'string' && p.son.startsWith('data:audio/')));
   if (!valide) return null;
   try {

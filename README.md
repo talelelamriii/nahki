@@ -4,7 +4,7 @@
 
 Nahki est un tableau de communication par pictogrammes pour les enfants non verbaux en Tunisie. L'enfant touche une image, le tableau dit le mot en derja ; il peut enchaîner plusieurs pictos pour faire une phrase. Les parents ajoutent leurs propres photos avec leur propre voix, et une bibliothèque partagée, validée par des orthophonistes, permet aux familles d'échanger leurs pictos.
 
-Projet Web – Groupe 7 – Objectif 3 : développement et intégration des fonctionnalités principales. L'interface est en français avec les mots en derja (latin et arabe) ; le code et les commentaires sont en français.
+Projet Web – Groupe 7 – Objectif 4 : finalisation du frontend et optimisation du site. L'interface est en français avec les mots en derja (latin et arabe) ; le code et les commentaires sont en français.
 
 <!-- Capture principale : ajouter docs/captures/tableau.png puis décommenter -->
 <!-- [![Le tableau de l'enfant](docs/captures/tableau.png)](docs/captures/tableau.png) -->
@@ -21,7 +21,7 @@ Projet Web – Groupe 7 – Objectif 3 : développement et intégration des fonc
 8. [Qualité : tests, accessibilité, performance](#qualité--tests-accessibilité-performance)
 9. [Workflow Git](#workflow-git)
 10. [Utilisation de l'IA](#utilisation-de-lia)
-11. [Prochaines étapes (vague 3)](#prochaines-étapes-vague-3)
+11. [Prochaines étapes](#prochaines-étapes)
 12. [Crédits](#crédits)
 
 ---
@@ -71,6 +71,7 @@ Ouvrir http://localhost:4200. Le **tableau** et l'**espace parent** marchent tou
 | `npm test` | Tests unitaires (Vitest) |
 | `npm run serve:ssr:nahki` | Sert le build avec le serveur Express (toutes les routes sont rendues côté client) |
 | `npx prettier --write src` | Formate le code selon `.prettierrc` |
+| `ng lint` | Analyse du code avec ESLint (après `ng add angular-eslint`, voir Qualité) |
 
 > Les photos et les voix ajoutées par la famille sont dans IndexedDB : vider les données du site dans le navigateur les efface.
 
@@ -91,6 +92,16 @@ Ouvrir http://localhost:4200. Le **tableau** et l'**espace parent** marchent tou
 | 06 Bibliothèque | `/bibliotheque` | Pictos publiés, recherche, filtres, écoute, « + À mon tableau » |
 | 18 Mes propositions | `/mes-propositions` | Statut de chaque picto envoyé, motif en cas de refus |
 | 09 Espace pro | `/pro` | Propositions en attente, valider ou refuser avec un motif |
+| 07 Fiche picto | `/bibliotheque/:id` | Grande image, voix, « + À mon tableau », pictos de la même catégorie |
+| 15 Réglages | `/parent/reglages` | Taille des cases, mot arabe, voix au toucher, longueur de phrase, aperçu en direct |
+| 16 Sauvegarde | `/parent/sauvegarde` | Exporter le tableau de la famille (photos et voix) dans un fichier, le restaurer |
+| 17 Imprimer | `/parent/imprimer` | Tableau papier par catégorie, mise en page A4 |
+| 10 Aide | `/aide` | Questions fréquentes par profil (enfant, parent, bibliothèque) |
+| 21 À propos | `/a-propos` | Présentation du projet et crédits |
+| 22 Confidentialité | `/confidentialite` | Ce qui reste sur l'appareil, ce qui va en ligne |
+| 23 Contact | `/contact` | Formulaire validé, ouvert dans la messagerie (`mailto`) |
+
+Tous les écrans prévus du sitemap sont développés : il n'y a plus de page « à venir ».
 
 ### Vague 1 – le cœur
 
@@ -107,6 +118,16 @@ Ouvrir http://localhost:4200. Le **tableau** et l'**espace parent** marchent tou
 - [x] **Partager** : envoie la photo, la voix et le mot avec le statut « en attente ».
 - [x] **Validation** : l'orthophoniste publie ou refuse avec un motif ; le parent voit le résultat.
 - [x] **« + À mon tableau »** : copie un picto publié (image et voix) dans le tableau de l'appareil.
+
+### Objectif 4 – finition du frontend
+
+- [x] **Toutes les pages du sitemap** : fiche picto, réglages, sauvegarde, impression, aide, à propos, confidentialité, contact.
+- [x] **Données dynamiques** : lecture d'un picto par identifiant et des pictos de la même catégorie (Supabase) ; réglages appliqués en direct au tableau ; export et import JSON avec validation de chaque picto.
+- [x] **États de chargement** : squelettes (skeletons) à la forme du contenu attendu sur le tableau, la bibliothèque, la fiche picto, Mes propositions, l'espace pro et l'impression ; spinners sur les actions longues ; messages d'erreur et listes vides.
+- [x] **Animations légères** : survol et appui des boutons et des cartes, apparition douce du contenu chargé, fondu entre les pages (View Transitions API), menu burger animé.
+- [x] **Navigation responsive** : menu burger sur smartphone (`aria-expanded`, liens retirés du parcours clavier quand il est fermé).
+- [x] **Mouvement réduit** : `prefers-reduced-motion` coupe toutes les animations.
+- [x] **Composants réutilisés** : `picto-card` sert au tableau, à l'aperçu des réglages, à l'impression et aux listes (nouvelles options `arabe` et `differe`) ; l'interrupteur et les squelettes sont des styles globaux.
 
 ### Petits plus
 
@@ -236,7 +257,7 @@ Un parent ne peut donc ni publier lui-même, ni proposer au nom d'un autre, mêm
 
 | Suite | Outil | Ce qui est couvert |
 |---|---|---|
-| Unitaires | Vitest + jsdom | Création de l'application (`app.spec.ts`) |
+| Unitaires | Vitest + jsdom | Création de l'application (`app.spec.ts`) ; validation des réglages et des fichiers de sauvegarde abîmés (`reglages.service.spec.ts`) |
 | Scénario backend | Manuel | Les 8 étapes ci-dessous |
 
 ```bash
@@ -251,10 +272,13 @@ npm test
 - Bordures des contrôles à 3,6:1 ; texte sombre sur les couleurs claires, texte blanc sur Lieux et Personnes pour garder le contraste ; doré du logo arabe assombri (`#8a5d00`) pour rester lisible sur blanc.
 - Cibles tactiles de 48 px pour les adultes et 56 px pour les onglets de l'enfant.
 - Textes arabes marqués `lang="ar"` pour la lecture d'écran et la police.
+- Chargements annoncés avec `aria-busy`, résultats d'import annoncés avec `aria-live`.
+- Questions de l'aide en `<details>`/`<summary>` natifs, utilisables au clavier ; tableau de la page Confidentialité avec en-têtes `scope="col"`.
+- Animations désactivées pour les personnes qui ont choisi « réduire les animations » dans leur système.
 
 ### Responsive
 
-Grille du tableau en 5 colonnes sur tablette et 3 sur smartphone (point de rupture à 600 px) ; en-tête, menu parent et formulaires passent en une colonne sous 700-800 px.
+Grille du tableau en 5 colonnes sur tablette et 3 sur smartphone (point de rupture à 600 px) ; en-tête en menu burger, menu parent en barre du bas et formulaires en une colonne sous 700 px ; fiche picto et réglages en une colonne sur smartphone ; impression adaptée à une page A4.
 
 ### Performance
 
@@ -262,6 +286,14 @@ Grille du tableau en 5 colonnes sur tablette et 3 sur smartphone (point de ruptu
 - Photos réduites à 512 px en WebP avant enregistrement (une photo de téléphone fait souvent 3 à 5 Mo).
 - Identifiants ARASAAC mis en cache ; données de base chargées une seule fois.
 - Budgets de build : 500 kB d'avertissement, 1 MB d'erreur pour le bundle initial.
+- Images différées (`loading="lazy"`) partout, sauf à l'impression où toutes doivent être prêtes.
+- Retour en haut de page à chaque navigation (`withInMemoryScrolling`).
+
+### Qualité du code
+
+- Code vérifié par le compilateur Angular en mode strict, templates compris ; aucun import ni variable inutilisé (`noUnusedLocals`).
+- Prettier (`.prettierrc`) pour un formatage homogène.
+- ESLint : à installer une fois avec `ng add angular-eslint`, puis `ng lint`.
 
 ### Sécurité
 
@@ -270,10 +302,10 @@ Règles d'accès dans la base (RLS) ; seule la clé publique est dans le code ; 
 ### Limites connues
 
 - Les pictos de base n'ont pas encore de voix enregistrée en derja : la synthèse vocale sert de secours.
-- Les tests automatiques se limitent à la création de l'application ; le backend est testé à la main.
-- Pas encore d'audit Lighthouse ni de test multi-navigateurs.
-- Pas de préférence « mouvement réduit » (`prefers-reduced-motion`).
-- Les pictos de la famille sont liés à un appareil et un navigateur tant que la sauvegarde (écran 16) n'existe pas.
+- Peu de tests automatiques ; le backend est testé à la main.
+- Audit Lighthouse et tests multi-navigateurs à finaliser.
+- Le formulaire de contact passe par la messagerie de l'utilisateur (pas de serveur d'envoi d'e-mails).
+- Les pictos de la famille sont liés à un appareil : la sauvegarde (écran 16) permet de les déplacer à la main.
 
 ---
 
@@ -302,18 +334,12 @@ Règles d'accès dans la base (RLS) ; seule la clé publique est dans le code ; 
 
 ---
 
-## Prochaines étapes (vague 3)
-
-Les routes existent déjà et affichent une page « à venir ». Par ordre d'utilité :
+## Prochaines étapes
 
 1. **Voix des pictos de base** enregistrées en derja par l'équipe.
-2. **Sauvegarde** (16) : exporter et réimporter les pictos de la famille pour changer d'appareil.
-3. **Réglages** (15) : taille des cases, affichage du mot arabe ou latin.
-4. **Imprimer le tableau** (17) pour l'école ou les sorties.
-5. **Fiche picto** (07) dans la bibliothèque.
-6. **Aide** (10) pour les parents et conseils pour les professionnels.
-7. **Pages d'information** : à propos et crédits (21), confidentialité (22), contact (23).
-8. **Tests** : tests unitaires des services, audit Lighthouse, test sur plusieurs navigateurs.
+2. **Proposer un picto** directement depuis la bibliothèque (écran 08).
+3. **Tests** : tests unitaires des services, audit Lighthouse, test sur plusieurs navigateurs.
+4. **Application installable** (PWA) qui fonctionne sans connexion.
 
 ---
 

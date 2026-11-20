@@ -74,7 +74,11 @@ export class FichePicto {
     this.ajoutEnCours.set(true);
     try {
       const resultat = await this.bibliotheque.ajouterAMonTableau(p);
-      this.toast.succes(resultat === 'deja' ? `« ${p.mot} » est déjà dans votre tableau.` : `« ${p.mot} » a été ajouté à votre tableau.`);
+      this.toast.succes(
+        resultat === 'deja'
+          ? `« ${p.mot} » est déjà dans votre tableau.`
+          : `« ${p.mot} » a été ajouté à votre tableau.`,
+      );
     } catch (e) {
       console.error('Ajout au tableau :', e);
       this.toast.erreur("L'ajout a échoué. Vérifiez la connexion internet.");

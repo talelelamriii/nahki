@@ -13,7 +13,12 @@ export interface Reglages {
   longueurPhrase: number;
 }
 
-export const REGLAGES_DEFAUT: Reglages = { taille: 'normale', arabe: false, direAuToucher: true, longueurPhrase: 8 };
+export const REGLAGES_DEFAUT: Reglages = {
+  taille: 'normale',
+  arabe: false,
+  direAuToucher: true,
+  longueurPhrase: 8,
+};
 
 /** Dimensions en pixels de chaque taille : case et image. */
 const DIMENSIONS: Record<TailleCases, { case: number; image: number; mot: number }> = {
@@ -34,7 +39,11 @@ export class ReglagesService {
   /** Variables CSS à poser sur le tableau pour appliquer la taille choisie. */
   readonly stylesTableau = computed(() => {
     const d = DIMENSIONS[this.etat().taille];
-    return { '--picto-card': `${d.case}px`, '--picto-image': `${d.image}px`, '--picto-mot': `${d.mot}px` };
+    return {
+      '--picto-card': `${d.case}px`,
+      '--picto-image': `${d.image}px`,
+      '--picto-mot': `${d.mot}px`,
+    };
   });
 
   modifier(changement: Partial<Reglages>): void {
@@ -61,10 +70,16 @@ function lire(): Reglages {
 export function valider(brut: Partial<Reglages> | null | undefined): Reglages {
   const r = { ...REGLAGES_DEFAUT };
   if (!brut || typeof brut !== 'object') return r;
-  if (brut.taille === 'petite' || brut.taille === 'normale' || brut.taille === 'grande') r.taille = brut.taille;
+  if (brut.taille === 'petite' || brut.taille === 'normale' || brut.taille === 'grande')
+    r.taille = brut.taille;
   if (typeof brut.arabe === 'boolean') r.arabe = brut.arabe;
   if (typeof brut.direAuToucher === 'boolean') r.direAuToucher = brut.direAuToucher;
-  if (Number.isInteger(brut.longueurPhrase) && brut.longueurPhrase! >= 3 && brut.longueurPhrase! <= 12) r.longueurPhrase = brut.longueurPhrase!;
+  if (
+    Number.isInteger(brut.longueurPhrase) &&
+    brut.longueurPhrase! >= 3 &&
+    brut.longueurPhrase! <= 12
+  )
+    r.longueurPhrase = brut.longueurPhrase!;
   return r;
 }
 

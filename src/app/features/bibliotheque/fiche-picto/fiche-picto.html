@@ -12,8 +12,14 @@
         </div>
       </div>
     }
-    @case ('non-configure') { <p class="alerte">Le backend Supabase n'est pas encore configuré (voir le README).</p> }
-    @case ('erreur') { <p class="alerte" role="alert">Ce picto n'a pas pu être chargé. Vérifiez la connexion internet.</p> }
+    @case ('non-configure') {
+      <p class="alerte">Le backend Supabase n'est pas encore configuré (voir le README).</p>
+    }
+    @case ('erreur') {
+      <p class="alerte" role="alert">
+        Ce picto n'a pas pu être chargé. Vérifiez la connexion internet.
+      </p>
+    }
     @case ('introuvable') {
       <div class="card vide">
         <h1>Picto introuvable</h1>
@@ -27,7 +33,9 @@
           <img class="fiche__image" [src]="p.imageUrl" [alt]="p.mot" />
 
           <div class="fiche__infos">
-            <span class="etiquette" [class.etiquette--claire]="cat()?.texte === 'on-ink'">{{ cat()?.libelle }}</span>
+            <span class="etiquette" [class.etiquette--claire]="cat()?.texte === 'on-ink'">{{
+              cat()?.libelle
+            }}</span>
             <h1 class="fiche__mot">{{ p.mot }}</h1>
             @if (p.motAr) {
               <p class="fiche__ar" lang="ar" dir="rtl">{{ p.motAr }}</p>
@@ -35,31 +43,49 @@
 
             @if (p.statut !== 'publie') {
               <p class="statut" [class.statut--refuse]="p.statut === 'refuse'">
-                {{ p.statut === 'en_attente' ? 'En attente de vérification par une orthophoniste' : 'Refusé' + (p.motif ? ' : ' + p.motif : '') }}
+                {{
+                  p.statut === 'en_attente'
+                    ? 'En attente de vérification par une orthophoniste'
+                    : 'Refusé' + (p.motif ? ' : ' + p.motif : '')
+                }}
               </p>
             }
 
             <div class="fiche__actions">
               @if (p.sonUrl) {
                 <button type="button" class="btn" (click)="ecouter()" [disabled]="enLecture()">
-                  <span aria-hidden="true">▶</span> {{ enLecture() ? 'Lecture…' : 'Écouter la voix' }}
+                  <span aria-hidden="true">▶</span>
+                  {{ enLecture() ? 'Lecture…' : 'Écouter la voix' }}
                 </button>
               } @else {
                 <p class="muted">Pas de voix enregistrée pour ce picto.</p>
               }
               @if (p.statut === 'publie') {
-                <button type="button" class="btn btn--primary" (click)="ajouter()" [disabled]="ajoutEnCours()">
+                <button
+                  type="button"
+                  class="btn btn--primary"
+                  (click)="ajouter()"
+                  [disabled]="ajoutEnCours()"
+                >
                   {{ ajoutEnCours() ? 'Ajout…' : '+ À mon tableau' }}
                 </button>
               }
             </div>
 
             <dl class="details">
-              <div><dt>Partagé le</dt><dd>{{ p.creeLe | date: 'd MMMM y' }}</dd></div>
-              <div><dt>Vérifié</dt><dd>{{ p.statut === 'publie' ? 'Oui, par une orthophoniste' : 'Pas encore' }}</dd></div>
+              <div>
+                <dt>Partagé le</dt>
+                <dd>{{ p.creeLe | date: 'd MMMM y' }}</dd>
+              </div>
+              <div>
+                <dt>Vérifié</dt>
+                <dd>{{ p.statut === 'publie' ? 'Oui, par une orthophoniste' : 'Pas encore' }}</dd>
+              </div>
             </dl>
 
-            <p class="muted note">Une image ne convient pas ? <a routerLink="/contact">Signalez-la</a>.</p>
+            <p class="muted note">
+              Une image ne convient pas ? <a routerLink="/contact">Signalez-la</a>.
+            </p>
           </div>
         </article>
 

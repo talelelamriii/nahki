@@ -1,7 +1,10 @@
 <section class="page infos">
   <div class="infos__intro">
     <h1>Confidentialité</h1>
-    <p class="muted">Nahki est utilisé par des enfants. Nous gardons le moins de données possible, et la plupart restent sur votre appareil.</p>
+    <p class="muted">
+      Nahki est utilisé par des enfants. Nous gardons le moins de données possible, et la plupart
+      restent sur votre appareil.
+    </p>
   </div>
 
   <div class="card infos__bloc">
@@ -9,12 +12,18 @@
     <div class="tableau-defilant">
       <table class="donnees">
         <thead>
-          <tr><th scope="col">Donnée</th><th scope="col">Où</th><th scope="col">Détail</th></tr>
+          <tr>
+            <th scope="col">Donnée</th>
+            <th scope="col">Où</th>
+            <th scope="col">Détail</th>
+          </tr>
         </thead>
         <tbody>
           @for (d of donnees; track d.quoi) {
             <tr>
-              <td><strong>{{ d.quoi }}</strong></td>
+              <td>
+                <strong>{{ d.quoi }}</strong>
+              </td>
               <td>
                 @if (d.ou === 'appareil') {
                   <span class="badge-lieu badge-lieu--appareil">Sur l'appareil</span>
@@ -35,7 +44,10 @@
     <ul>
       <li>Pas de publicité, pas de revente de données.</li>
       <li>Pas de compte nécessaire pour utiliser le tableau.</li>
-      <li>Pas de photo de personne dans la bibliothèque partagée : elles restent privées sur votre appareil.</li>
+      <li>
+        Pas de photo de personne dans la bibliothèque partagée : elles restent privées sur votre
+        appareil.
+      </li>
     </ul>
   </div>
 
@@ -52,9 +64,11 @@
   <div class="card infos__bloc">
     <h2>Vos droits</h2>
     <p>
-      Vous pouvez demander à consulter ou supprimer votre compte et les pictos que vous avez partagés.
+      Vous pouvez demander à consulter ou supprimer votre compte et les pictos que vous avez
+      partagés.
       <a routerLink="/contact">Écrivez-nous</a>. Pour effacer les données gardées sur l'appareil,
-      supprimez vos pictos dans l'espace parent ou effacez les données du site dans les réglages du navigateur.
+      supprimez vos pictos dans l'espace parent ou effacez les données du site dans les réglages du
+      navigateur.
     </p>
   </div>
 </section>

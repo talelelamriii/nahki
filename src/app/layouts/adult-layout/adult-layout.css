@@ -42,9 +42,36 @@ main { flex: 1; }
 }
 .pied nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
 
+.nav__lien { transition: color 0.15s ease, border-color 0.15s ease; }
+.nav__lien:hover { color: var(--ink); }
+
+/* Bouton burger : visible seulement sur smartphone */
+.burger {
+  display: none; width: var(--touch-adult); height: var(--touch-adult); flex: none;
+  border: 0; border-radius: var(--radius-sm); background: none; color: var(--ink); cursor: pointer;
+}
+.burger__barres, .burger__barres::before, .burger__barres::after {
+  display: block; width: 24px; height: 3px; margin: 0 auto; border-radius: 2px; background: currentColor;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.burger__barres { position: relative; }
+.burger__barres::before, .burger__barres::after { content: ''; position: absolute; left: 0; }
+.burger__barres::before { top: -8px; }
+.burger__barres::after { top: 8px; }
+.burger[aria-expanded="true"] .burger__barres { background: transparent; }
+.burger[aria-expanded="true"] .burger__barres::before { transform: translateY(8px) rotate(45deg); }
+.burger[aria-expanded="true"] .burger__barres::after { transform: translateY(-8px) rotate(-45deg); }
+
 @media (max-width: 700px) {
-  .entete { flex-wrap: wrap; padding: var(--space-2) var(--space-4); gap: 0 var(--space-4); }
-  .nav { order: 3; width: 100%; margin: 0; gap: var(--space-4); overflow-x: auto; }
-  .nav__lien { padding: 10px 0; }
+  .entete { position: relative; flex-wrap: wrap; padding: var(--space-2) var(--space-4); gap: 0 var(--space-2); }
   .entete .btn, .compte { margin-left: auto; }
+  .burger { display: block; order: 3; }
+  .nav {
+    order: 4; width: 100%; margin: 0; flex-direction: column; gap: 0;
+    max-height: 0; overflow: hidden; visibility: hidden; /* menu fermé : liens hors du parcours clavier */
+    transition: max-height 0.25s ease, visibility 0s linear 0.25s;
+  }
+  .nav--ouverte { max-height: 320px; visibility: visible; transition: max-height 0.25s ease; border-top: 1px solid var(--line); margin-top: var(--space-2); }
+  .nav__lien { padding: 12px 0; min-height: var(--touch-adult); border-bottom: 1px solid var(--line); }
+  .nav__lien--actif { border-bottom-color: var(--line); box-shadow: inset 4px 0 0 var(--ink); padding-left: 12px; }
 }

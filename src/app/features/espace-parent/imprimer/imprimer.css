@@ -1,25 +1,69 @@
-.filtres { display: flex; flex-wrap: wrap; gap: var(--space-2); }
-.options { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--space-6); }
-.options .field__input { min-width: 180px; }
-.apercu-titre { margin: var(--space-8) 0 var(--space-4); }
+.filtres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-6);
+}
+.options .field__input {
+  min-width: 180px;
+}
+.apercu-titre {
+  margin: var(--space-8) 0 var(--space-4);
+}
 
 /* La feuille imite une page A4 à l'écran */
 .feuille {
-  --picto-card: 0px; --picto-image: 80px; --picto-mot: 18px;
-  background: #fff; padding: var(--space-6); border-radius: var(--radius-sm); box-shadow: var(--shadow-card);
+  --picto-card: 0px;
+  --picto-image: 80px;
+  --picto-mot: 18px;
+  background: #fff;
+  padding: var(--space-6);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
 }
-.feuille__titre { font: 700 20px/1.2 var(--font-display); margin-bottom: var(--space-4); }
-.groupe { break-inside: avoid; margin-bottom: var(--space-6); }
+.feuille__titre {
+  font: 700 20px/1.2 var(--font-display);
+  margin-bottom: var(--space-4);
+}
+.groupe {
+  break-inside: avoid;
+  margin-bottom: var(--space-6);
+}
 .groupe__titre {
-  display: inline-block; margin-bottom: var(--space-2); padding: 2px 14px;
-  border-radius: var(--radius-pill); background: var(--cat); font-size: 16px;
-  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  display: inline-block;
+  margin-bottom: var(--space-2);
+  padding: 2px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--cat);
+  font-size: 16px;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
-.grille { display: grid; grid-template-columns: repeat(var(--colonnes, 4), 1fr); gap: 10px; }
-.grille app-picto-card { break-inside: avoid; }
-.case-vide { aspect-ratio: 1; border-radius: var(--radius-lg); }
+.grille {
+  display: grid;
+  grid-template-columns: repeat(var(--colonnes, 4), 1fr);
+  gap: 10px;
+}
+.grille app-picto-card {
+  break-inside: avoid;
+}
+.case-vide {
+  aspect-ratio: 1;
+  border-radius: var(--radius-lg);
+}
 
 @media print {
-  .sans-impression { display: none !important; }
-  .feuille { box-shadow: none; padding: 0; border-radius: 0; }
+  .sans-impression {
+    display: none !important;
+  }
+  .feuille {
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+  }
 }

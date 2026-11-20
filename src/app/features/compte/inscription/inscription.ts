@@ -56,6 +56,12 @@ export class Inscription {
       }
     } catch (e) {
       console.error('Inscription :', e);
+      // Le compte a pu être créé malgré l'erreur (par exemple sur un second envoi) : on n'affiche pas d'erreur.
+      if (this.auth.estConnecte()) {
+        this.toast.succes('Votre compte est créé.');
+        this.router.navigateByUrl(this.suite().startsWith('/') ? this.suite() : '/bibliotheque');
+        return;
+      }
       const texte = e instanceof Error ? e.message : '';
       this.erreur.set(
         /already|registered/i.test(texte)

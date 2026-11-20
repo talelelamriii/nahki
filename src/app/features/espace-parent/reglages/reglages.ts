@@ -17,7 +17,7 @@ export class Reglages implements OnInit {
   private readonly toast = inject(ToastService);
 
   protected readonly tailles: { id: TailleCases; libelle: string; aide: string }[] = [
-    { id: 'petite', libelle: 'Petites', aide: 'Plus de pictos à l\'écran' },
+    { id: 'petite', libelle: 'Petites', aide: "Plus de pictos à l'écran" },
     { id: 'normale', libelle: 'Normales', aide: 'Recommandé sur tablette' },
     { id: 'grande', libelle: 'Grandes', aide: 'Plus faciles à toucher' },
   ];
