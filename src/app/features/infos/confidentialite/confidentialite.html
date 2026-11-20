@@ -1,0 +1,60 @@
+<section class="page infos">
+  <div class="infos__intro">
+    <h1>Confidentialité</h1>
+    <p class="muted">Nahki est utilisé par des enfants. Nous gardons le moins de données possible, et la plupart restent sur votre appareil.</p>
+  </div>
+
+  <div class="card infos__bloc">
+    <h2>Où sont vos données ?</h2>
+    <div class="tableau-defilant">
+      <table class="donnees">
+        <thead>
+          <tr><th scope="col">Donnée</th><th scope="col">Où</th><th scope="col">Détail</th></tr>
+        </thead>
+        <tbody>
+          @for (d of donnees; track d.quoi) {
+            <tr>
+              <td><strong>{{ d.quoi }}</strong></td>
+              <td>
+                @if (d.ou === 'appareil') {
+                  <span class="badge-lieu badge-lieu--appareil">Sur l'appareil</span>
+                } @else {
+                  <span class="badge-lieu badge-lieu--ligne">En ligne</span>
+                }
+              </td>
+              <td>{{ d.detail }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card infos__bloc">
+    <h2>Ce que nous ne faisons pas</h2>
+    <ul>
+      <li>Pas de publicité, pas de revente de données.</li>
+      <li>Pas de compte nécessaire pour utiliser le tableau.</li>
+      <li>Pas de photo de personne dans la bibliothèque partagée : elles restent privées sur votre appareil.</li>
+    </ul>
+  </div>
+
+  <div class="card infos__bloc">
+    <h2>Services extérieurs</h2>
+    <ul>
+      <li><strong>ARASAAC</strong> fournit les images des pictogrammes de base.</li>
+      <li><strong>Google Fonts</strong> fournit les polices du site.</li>
+      <li><strong>Supabase</strong> héberge les comptes et la bibliothèque partagée.</li>
+      <li>La voix des pictos de base est produite par la synthèse vocale de votre navigateur.</li>
+    </ul>
+  </div>
+
+  <div class="card infos__bloc">
+    <h2>Vos droits</h2>
+    <p>
+      Vous pouvez demander à consulter ou supprimer votre compte et les pictos que vous avez partagés.
+      <a routerLink="/contact">Écrivez-nous</a>. Pour effacer les données gardées sur l'appareil,
+      supprimez vos pictos dans l'espace parent ou effacez les données du site dans les réglages du navigateur.
+    </p>
+  </div>
+</section>

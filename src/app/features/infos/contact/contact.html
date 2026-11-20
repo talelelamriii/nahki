@@ -1,0 +1,56 @@
+<section class="page infos">
+  <div class="infos__intro">
+    <h1>Contact</h1>
+    <p class="muted">Une question, un picto à signaler, une demande de compte orthophoniste ? Écrivez-nous.</p>
+  </div>
+
+  @if (envoye()) {
+    <div class="card infos__bloc" role="status">
+      <h2>Message prêt</h2>
+      <p>Votre messagerie s'est ouverte avec le message. Il ne reste qu'à l'envoyer.</p>
+      <p class="muted">Rien ne s'est ouvert ? Écrivez directement à <a [href]="'mailto:' + email">{{ email }}</a>.</p>
+      <button type="button" class="btn" (click)="recommencer()">Écrire un autre message</button>
+    </div>
+  } @else {
+    <form class="card compte__carte contact" [formGroup]="form" (ngSubmit)="envoyer()" novalidate>
+      <label class="field" [class.field--error]="invalide('nom')">
+        <span class="field__label">Votre nom</span>
+        <input class="field__input" type="text" formControlName="nom" autocomplete="name" />
+        @if (invalide('nom')) {
+          <span class="field__error">Entrez votre nom.</span>
+        }
+      </label>
+
+      <label class="field" [class.field--error]="invalide('email')">
+        <span class="field__label">Adresse e-mail</span>
+        <input class="field__input" type="email" formControlName="email" autocomplete="email" placeholder="nom@exemple.tn" />
+        <span class="field__help">Pour pouvoir vous répondre.</span>
+        @if (invalide('email')) {
+          <span class="field__error">Entrez une adresse e-mail valide.</span>
+        }
+      </label>
+
+      <label class="field">
+        <span class="field__label">Sujet</span>
+        <select class="field__input" formControlName="sujet">
+          @for (s of sujets; track s) {
+            <option [value]="s">{{ s }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="field" [class.field--error]="invalide('message')">
+        <span class="field__label">Message</span>
+        <textarea class="field__input contact__message" formControlName="message" rows="6"></textarea>
+        <span class="field__help">{{ form.controls.message.value.length }} / 1000 caractères</span>
+        @if (invalide('message')) {
+          <span class="field__error">Votre message doit faire entre 10 et 1000 caractères.</span>
+        }
+      </label>
+
+      <button type="submit" class="btn btn--primary">Préparer le message</button>
+    </form>
+  }
+
+  <p class="muted">Vous pouvez aussi écrire directement à <a [href]="'mailto:' + email">{{ email }}</a>.</p>
+</section>
