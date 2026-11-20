@@ -1,0 +1,10 @@
+/* Styles communs aux pages Réglages, Sauvegarde et Imprimer de l'espace parent */
+.haut { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-6); }
+.sections { display: flex; flex-direction: column; gap: var(--space-6); }
+.section { display: flex; flex-direction: column; gap: var(--space-4); }
+.section__aide { font-size: 14px; color: var(--ink-muted); }
+.ligne-reglage { display: flex; justify-content: space-between; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+.ligne-reglage__texte { display: flex; flex-direction: column; gap: 2px; max-width: 520px; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--space-4); align-items: center; }
+.alerte { padding: var(--space-4); border-radius: var(--radius-sm); background: var(--danger-soft); color: var(--danger); font-weight: 700; }
+.succes { padding: var(--space-4); border-radius: var(--radius-sm); background: var(--success-soft); color: var(--success); font-weight: 700; }

@@ -1,4 +1,4 @@
-<div class="tableau">
+<div class="tableau" [style]="reglages.stylesTableau()">
   <app-sentence-bar
     [phrase]="phrase()"
     [lectureIndex]="lectureIndex()"
@@ -20,7 +20,7 @@
   } @else {
     <div class="grille apparition" role="tabpanel">
       @for (p of grille(); track p.id) {
-        <app-picto-card [picto]="p" (toucher)="toucher($event)" />
+        <app-picto-card [picto]="p" [arabe]="reglages.valeurs().arabe" (toucher)="toucher($event)" />
       }
       <button type="button" class="ajouter" (click)="ajouter()" aria-label="Ajouter un picto (espace parent)">
         <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 6v28M6 20h28" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>

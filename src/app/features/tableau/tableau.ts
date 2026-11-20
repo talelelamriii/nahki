@@ -4,11 +4,10 @@ import { CategorieId, Picto } from '../../core/models/picto';
 import { AudioService } from '../../core/services/audio.service';
 import { PictosService } from '../../core/services/pictos.service';
 import { ParentLockService } from '../../core/services/parent-lock.service';
+import { ReglagesService } from '../../core/services/reglages.service';
 import { CategoryTabs } from '../../shared/components/category-tabs/category-tabs';
 import { PictoCard } from '../../shared/components/picto-card/picto-card';
 import { SentenceBar } from '../../shared/components/sentence-bar/sentence-bar';
-
-const LONGUEUR_MAX = 8;
 
 /**
  * Écrans 02 et 03 : le tableau de l'enfant, en plein écran, sans menu.
@@ -25,6 +24,7 @@ export class Tableau implements OnInit, OnDestroy {
   private readonly audio = inject(AudioService);
   private readonly router = inject(Router);
   private readonly verrou = inject(ParentLockService);
+  protected readonly reglages = inject(ReglagesService);
 
   protected readonly categorie = signal<CategorieId>('manger');
   protected readonly phrase = signal<Picto[]>([]);
@@ -47,8 +47,9 @@ export class Tableau implements OnInit, OnDestroy {
   }
 
   protected toucher(picto: Picto): void {
-    this.phrase.update((p) => (p.length < LONGUEUR_MAX ? [...p, picto] : p));
-    this.audio.dire(picto);
+    const { longueurPhrase, direAuToucher } = this.reglages.valeurs();
+    this.phrase.update((p) => (p.length < longueurPhrase ? [...p, picto] : p));
+    if (direAuToucher) this.audio.dire(picto);
   }
 
   protected lire(): void {

@@ -10,11 +10,14 @@
   (click)="clic()"
 >
   @if (src(); as url) {
-    <img class="case__image" [src]="url" alt="" loading="lazy" (error)="src.set(null)" />
+    <img class="case__image" [src]="url" alt="" [attr.loading]="differe() ? 'lazy' : 'eager'" (error)="src.set(null)" />
   } @else {
     <span class="case__emoji" aria-hidden="true">{{ picto().emoji ?? '🖼️' }}</span>
   }
   @if (taille() === 'normale') {
     <span class="case__mot">{{ picto().mot }}</span>
+    @if (arabe() && picto().motAr) {
+      <span class="case__ar" lang="ar" dir="rtl">{{ picto().motAr }}</span>
+    }
   }
 </button>

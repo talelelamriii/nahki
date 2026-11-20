@@ -10,14 +10,6 @@
 .ligne__mot { display: flex; flex-direction: column; }
 .ligne__actions { display: flex; gap: var(--space-2); align-items: center; justify-content: flex-end; }
 
-.interrupteur { display: flex; align-items: center; gap: var(--space-2); cursor: pointer; }
-.interrupteur input { position: absolute; opacity: 0; }
-.interrupteur__piste { width: 44px; height: 26px; border-radius: 13px; background: var(--line-strong); position: relative; }
-.interrupteur__piste::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: var(--card); transition: left 0.15s; }
-.interrupteur input:checked + .interrupteur__piste { background: var(--success); }
-.interrupteur input:checked + .interrupteur__piste::after { left: 21px; }
-.interrupteur input:focus-visible + .interrupteur__piste { outline: 3px solid var(--focus); outline-offset: 2px; }
-.interrupteur__texte { font-size: 14px; width: 52px; }
 
 .badge { padding: 4px 12px; border-radius: var(--radius-pill); background: var(--surface); color: var(--ink-muted); font-size: 13px; font-weight: 700; }
 .badge--envoye { background: var(--success-soft); color: var(--success); }

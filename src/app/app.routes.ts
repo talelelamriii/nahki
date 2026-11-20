@@ -4,11 +4,8 @@ import { parentGuard } from './core/guards/parent.guard';
 
 /**
  * Routes calquées sur le sitemap de l'Objectif 2.
- * `ecran` = numéro du wireframe correspondant ; `vague` = moment prévu pour le développer.
  * Chaque page est chargée à la demande (loadComponent) pour un premier affichage rapide.
  */
-const aVenir = () => import('./features/a-venir/a-venir').then((m) => m.AVenir);
-
 export const routes: Routes = [
   // ----- Pages adultes : en-tête + pied de page -----
   {
@@ -44,9 +41,9 @@ export const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'mes-pictos' },
       { path: 'mes-pictos', title: 'Mes pictos – Nahki', loadComponent: () => import('./features/espace-parent/mes-pictos/mes-pictos').then((m) => m.MesPictos) },
       { path: 'ajouter', title: 'Ajouter un picto – Nahki', loadComponent: () => import('./features/espace-parent/ajouter-picto/ajouter-picto').then((m) => m.AjouterPicto) },
-      { path: 'reglages', title: 'Réglages – Nahki', loadComponent: aVenir, data: { titre: 'Réglages', ecran: '15', vague: 3 } },
-      { path: 'sauvegarde', title: 'Sauvegarde – Nahki', loadComponent: aVenir, data: { titre: 'Sauvegarde', ecran: '16', vague: 3 } },
-      { path: 'imprimer', title: 'Imprimer – Nahki', loadComponent: aVenir, data: { titre: 'Imprimer le tableau', ecran: '17', vague: 3 } },
+      { path: 'reglages', title: 'Réglages – Nahki', loadComponent: () => import('./features/espace-parent/reglages/reglages').then((m) => m.Reglages) },
+      { path: 'sauvegarde', title: 'Sauvegarde – Nahki', loadComponent: () => import('./features/espace-parent/sauvegarde/sauvegarde').then((m) => m.Sauvegarde) },
+      { path: 'imprimer', title: 'Imprimer – Nahki', loadComponent: () => import('./features/espace-parent/imprimer/imprimer').then((m) => m.Imprimer) },
     ],
   },
 

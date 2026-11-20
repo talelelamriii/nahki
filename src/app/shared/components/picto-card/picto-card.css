@@ -11,13 +11,15 @@
   color: var(--ink);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease, background-color 0.1s ease;
 }
 .case--appuyee { background: var(--surface); transform: scale(0.97); }
 .case--active { outline: 4px solid var(--ink); outline-offset: 2px; }
 
-.case__image { width: 96px; height: 96px; object-fit: contain; }
-.case__emoji { font-size: 64px; line-height: 96px; }
-.case__mot { font: 700 22px/26px var(--font-display); }
+.case__image { width: var(--picto-image, 96px); height: var(--picto-image, 96px); object-fit: contain; }
+.case__emoji { font-size: calc(var(--picto-image, 96px) * 0.66); line-height: var(--picto-image, 96px); }
+.case__mot { font: 700 var(--picto-mot, 22px)/1.2 var(--font-display); }
+.case__ar { font-size: calc(var(--picto-mot, 22px) * 0.85); line-height: 1.3; color: var(--ink-muted); }
 
 /* Variante mini : barre de phrase, listes de l'espace parent */
 .case--mini {

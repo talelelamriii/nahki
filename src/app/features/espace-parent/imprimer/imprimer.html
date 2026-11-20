@@ -1,0 +1,61 @@
+<header class="haut sans-impression">
+  <h1>Imprimer le tableau</h1>
+  <p class="muted">Un tableau papier pour les sorties, l'école ou la porte du frigo. Choisissez les catégories, puis imprimez.</p>
+</header>
+
+<section class="card section sans-impression" aria-label="Options d'impression">
+  <div class="filtres" role="group" aria-label="Catégories à imprimer">
+    @for (c of categories; track c.id) {
+      <button type="button" class="chip" [attr.aria-pressed]="choisies().has(c.id)" (click)="basculer(c.id)">{{ c.libelle }}</button>
+    }
+  </div>
+
+  <div class="options">
+    <label class="field">
+      <span class="field__label">Pictos par ligne</span>
+      <select class="field__input" [value]="colonnes()" (change)="colonnes.set(+$any($event.target).value)">
+        <option [value]="3">3 (grandes cases)</option>
+        <option [value]="4" selected>4</option>
+        <option [value]="5">5 (petites cases)</option>
+      </select>
+    </label>
+    <label class="interrupteur">
+      <input type="checkbox" [checked]="arabe()" (change)="arabe.set(!arabe())" />
+      <span class="interrupteur__piste" aria-hidden="true"></span>
+      <span>Mot en arabe</span>
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn--primary" (click)="imprimer()" [disabled]="!total()">⎙ Imprimer ({{ total() }} pictos)</button>
+    <span class="section__aide">Astuce : dans la fenêtre d'impression, choisissez « Enregistrer en PDF » pour garder le fichier.</span>
+  </div>
+</section>
+
+<h2 class="apercu-titre sans-impression">Aperçu</h2>
+
+@if (erreur()) {
+  <p class="alerte">Les pictogrammes n'ont pas pu être chargés. Rechargez la page.</p>
+} @else if (!pictos.charge()) {
+  <div class="feuille" [style.--colonnes]="colonnes()">
+    <div class="grille">
+      @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) { <div class="skeleton case-vide"></div> }
+    </div>
+  </div>
+} @else {
+  <div class="feuille" [style.--colonnes]="colonnes()">
+    <p class="feuille__titre">Nahki <span lang="ar">نحكي</span> · mon tableau</p>
+    @for (g of groupes(); track g.categorie.id) {
+      <section class="groupe">
+        <h3 class="groupe__titre" [style.--cat]="g.categorie.couleur">{{ g.categorie.libelle }}</h3>
+        <div class="grille">
+          @for (p of g.pictos; track p.id) {
+            <app-picto-card [picto]="p" [arabe]="arabe()" [decorative]="true" [differe]="false" />
+          }
+        </div>
+      </section>
+    } @empty {
+      <p class="muted">Aucun picto dans les catégories choisies.</p>
+    }
+  </div>
+}

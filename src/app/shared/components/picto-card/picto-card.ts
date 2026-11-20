@@ -22,6 +22,10 @@ export class PictoCard {
   readonly active = input(false);
   /** Désactive le clic (affichage seul). */
   readonly decorative = input(false);
+  /** Affiche aussi le mot en arabe (réglage « libellés en arabe »). */
+  readonly arabe = input(false);
+  /** Chargement différé de l'image ; désactivé pour l'impression (toutes les images doivent être prêtes). */
+  readonly differe = input(true);
   readonly toucher = output<Picto>();
 
   protected readonly couleur = computed(() => categorie(this.picto().categorie).couleur);

@@ -62,6 +62,30 @@ export class PictosService {
     return picto;
   }
 
+  /** Sauvegarde : liste des pictos masqués. */
+  listeMasques(): string[] {
+    return [...this.masques()];
+  }
+
+  /** Sauvegarde : ajoute des pictos masqués (ceux déjà masqués le restent). */
+  fusionnerMasques(ids: readonly string[]): void {
+    const suivant = new Set([...this.masques(), ...ids]);
+    this.masques.set(suivant);
+    ecrireMasques(suivant);
+  }
+
+  /**
+   * Sauvegarde : remet un picto de la famille avec son identifiant d'origine.
+   * Renvoie `false` s'il est déjà sur cet appareil (rien n'est écrasé).
+   */
+  async restaurer(picto: PictoFamille): Promise<boolean> {
+    await this.charger();
+    if (this.famille().some((p) => p.id === picto.id)) return false;
+    await this.db.enregistrer(picto);
+    this.famille.update((liste) => [...liste, versPicto(picto)]);
+    return true;
+  }
+
   async supprimer(id: string): Promise<void> {
     await this.db.supprimer(id);
     const picto = this.famille().find((p) => p.id === id);
