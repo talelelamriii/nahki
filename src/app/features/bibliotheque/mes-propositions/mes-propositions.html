@@ -1,0 +1,31 @@
+<section class="page">
+  <h1>Mes propositions</h1>
+  <p class="muted sous-titre">Les pictos que vous avez partagés et leur statut.</p>
+
+  @switch (etat()) {
+    @case ('chargement') { <p class="muted">Chargement…</p> }
+    @case ('erreur') { <p class="muted">Impossible de charger vos propositions. Vérifiez la connexion internet.</p> }
+    @default {
+      <ul class="liste">
+        @for (p of propositions(); track p.id) {
+          <li class="ligne">
+            <img [src]="p.imageUrl" alt="" class="ligne__image" />
+            <div class="ligne__mot">
+              <strong>{{ p.mot }}</strong>
+              <span class="muted">Envoyé le {{ p.creeLe | date: 'dd/MM/yyyy' }}</span>
+            </div>
+            <span class="badge" [class]="'badge badge--' + p.statut">{{ libelles[p.statut] }}</span>
+            @if (p.statut === 'refuse' && p.motif) {
+              <p class="ligne__motif">Motif : {{ p.motif }}</p>
+            }
+          </li>
+        } @empty {
+          <li class="vide">
+            <p>Vous n'avez encore rien partagé.</p>
+            <a routerLink="/parent/mes-pictos" class="btn btn--primary">Partager un de mes pictos</a>
+          </li>
+        }
+      </ul>
+    }
+  }
+</section>

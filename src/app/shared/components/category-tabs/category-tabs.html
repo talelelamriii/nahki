@@ -1,0 +1,15 @@
+<div class="onglets" role="tablist" aria-label="Catégories">
+  @for (c of categories; track c.id) {
+    <button
+      type="button"
+      role="tab"
+      class="onglet"
+      [class.onglet--clair]="c.texte === 'on-ink'"
+      [style.background]="c.couleur"
+      [attr.aria-selected]="c.id === active()"
+      (click)="choisir.emit(c.id)"
+    >
+      {{ c.libelle }}
+    </button>
+  }
+</div>

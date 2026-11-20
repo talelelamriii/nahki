@@ -1,0 +1,82 @@
+<h1>Ajouter un picto</h1>
+
+<form class="formulaire" [formGroup]="form" (ngSubmit)="enregistrer()" novalidate>
+  <div class="etapes">
+    <!-- 1. Photo -->
+    <fieldset class="etape">
+      <legend>1. La photo</legend>
+      <div class="photo">
+        @if (photoUrl(); as url) {
+          <img [src]="url" alt="Photo choisie" class="photo__image" />
+        } @else {
+          <div class="photo__vide" aria-hidden="true">📷</div>
+        }
+        <div class="photo__actions">
+          <label class="btn btn--primary">
+            Prendre une photo
+            <input type="file" accept="image/*" capture="environment" class="sr-only" (change)="choisirPhoto($event)" />
+          </label>
+          <label class="btn">
+            Choisir une image
+            <input type="file" accept="image/*" class="sr-only" (change)="choisirPhoto($event)" />
+          </label>
+        </div>
+      </div>
+      @if (envoye() && !photo()) {
+        <p class="field__error" role="alert">Ajoutez une photo de l'objet, du plat ou du lieu.</p>
+      }
+    </fieldset>
+
+    <!-- 2. Le mot -->
+    <fieldset class="etape">
+      <legend>2. Le mot</legend>
+      <label class="field" [class.field--error]="erreur('mot')">
+        <span class="field__label">Le mot en derja</span>
+        <input class="field__input" formControlName="mot" placeholder="ex. doudou" autocomplete="off" />
+        @if (erreur('mot'); as message) {
+          <span class="field__error">{{ message }}</span>
+        } @else {
+          <span class="field__help">Écrit comme on le dit à la maison.</span>
+        }
+      </label>
+      <label class="field" [class.field--error]="erreur('motAr')">
+        <span class="field__label">En arabe (facultatif)</span>
+        <input class="field__input" formControlName="motAr" placeholder="ex. دودو" dir="rtl" lang="ar" autocomplete="off" />
+        @if (erreur('motAr'); as message) {
+          <span class="field__error">{{ message }}</span>
+        }
+      </label>
+    </fieldset>
+
+    <!-- 3. Catégorie -->
+    <fieldset class="etape">
+      <legend>3. La catégorie</legend>
+      <div class="categories">
+        @for (c of categories; track c.id) {
+          <label class="categorie" [style.--cat]="c.couleur">
+            <input type="radio" formControlName="categorie" [value]="c.id" />
+            <span>{{ c.libelle }}</span>
+          </label>
+        }
+      </div>
+    </fieldset>
+
+    <!-- 4. Voix -->
+    <fieldset class="etape">
+      <legend>4. La voix</legend>
+      <app-voice-recorder (son)="son.set($event)" />
+    </fieldset>
+  </div>
+
+  <aside class="apercu">
+    <p class="field__label">Aperçu de la case</p>
+    <app-picto-card [picto]="apercu()" [decorative]="true" />
+  </aside>
+
+  <div class="boutons">
+    <button type="button" class="btn" (click)="annuler()">Annuler</button>
+    <button type="submit" class="btn btn--primary" [disabled]="enregistrement()">
+      {{ enregistrement() ? 'Enregistrement…' : 'Enregistrer' }}
+    </button>
+  </div>
+</form>

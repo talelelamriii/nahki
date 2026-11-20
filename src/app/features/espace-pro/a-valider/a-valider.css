@@ -1,0 +1,8 @@
+.sous-titre { margin: var(--space-2) 0 var(--space-6); max-width: 70ch; }
+.liste { display: flex; flex-direction: column; gap: var(--space-4); }
+.fiche { display: grid; grid-template-columns: 240px 1fr; gap: var(--space-6); }
+.fiche__image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-md); background: var(--surface); }
+.fiche__infos { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.fiche__infos .field { width: min(100%, 360px); }
+.fiche__boutons { display: flex; gap: var(--space-4); margin-top: var(--space-2); }
+@media (max-width: 700px) { .fiche { grid-template-columns: 1fr; } }

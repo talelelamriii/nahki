@@ -1,0 +1,7 @@
+.compte { display: flex; justify-content: center; }
+.compte__carte { width: min(100%, 440px); display: flex; flex-direction: column; gap: var(--space-4); }
+.compte__carte hr { width: 100%; border: 0; border-top: 1px solid var(--line); }
+.compte__erreur { padding: 10px var(--space-4); border-radius: var(--radius-sm); background: var(--danger-soft); color: var(--danger); font-weight: 700; }
+.compte__info { padding: var(--space-4); border-radius: var(--radius-sm); background: var(--surface); font-size: 14px; }
+.compte__case { display: flex; gap: var(--space-2); align-items: flex-start; font-size: 14px; }
+.compte__case input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--ink); }

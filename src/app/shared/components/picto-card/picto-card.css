@@ -1,0 +1,35 @@
+:host { display: block; }
+
+.case {
+  width: 100%;
+  min-height: var(--picto-card);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: var(--space-4) var(--space-2);
+  background: var(--card);
+  border: 3px solid var(--cat);
+  border-radius: var(--radius-lg);
+  color: var(--ink);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.case--appuyee { background: var(--surface); transform: scale(0.97); }
+.case--active { outline: 4px solid var(--ink); outline-offset: 2px; }
+
+.case__image { width: 96px; height: 96px; object-fit: contain; }
+.case__emoji { font-size: 64px; line-height: 96px; }
+.case__mot { font: 700 22px/26px var(--font-display); }
+
+/* Variante mini : barre de phrase, listes de l'espace parent */
+.case--mini {
+  min-height: 0; width: 72px; height: 72px; padding: 6px;
+  background: var(--cat); border: 0; border-radius: var(--radius-sm);
+}
+.case--mini .case__image { width: 56px; height: 56px; background: var(--card); border-radius: 6px; }
+.case--mini .case__emoji { font-size: 36px; line-height: 56px; }
+
+@media (max-width: 600px) {
+  .case:not(.case--mini) { min-height: 112px; padding: var(--space-2); }
+  .case:not(.case--mini) .case__image { width: 64px; height: 64px; }
+  .case:not(.case--mini) .case__emoji { font-size: 44px; line-height: 64px; }
+  .case__mot { font-size: 17px; line-height: 22px; }
+}

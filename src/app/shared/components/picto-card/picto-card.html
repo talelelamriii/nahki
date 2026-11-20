@@ -1,0 +1,20 @@
+<button
+  type="button"
+  class="case"
+  [class.case--mini]="taille() === 'mini'"
+  [class.case--active]="active()"
+  [class.case--appuyee]="appuyee()"
+  [style.--cat]="couleur()"
+  [attr.aria-label]="picto().mot"
+  [attr.tabindex]="decorative() ? -1 : null"
+  (click)="clic()"
+>
+  @if (src(); as url) {
+    <img class="case__image" [src]="url" alt="" loading="lazy" (error)="src.set(null)" />
+  } @else {
+    <span class="case__emoji" aria-hidden="true">{{ picto().emoji ?? '🖼️' }}</span>
+  }
+  @if (taille() === 'normale') {
+    <span class="case__mot">{{ picto().mot }}</span>
+  }
+</button>

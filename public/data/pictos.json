@@ -1,0 +1,52 @@
+[
+  { "id": "nekol", "mot": "nekol", "motAr": "ناكل", "categorie": "manger", "arasaac": "manger", "emoji": "🍽️" },
+  { "id": "khobz", "mot": "khobz", "motAr": "خبز", "categorie": "manger", "arasaac": "pain", "emoji": "🍞" },
+  { "id": "couscous", "mot": "couscous", "motAr": "كسكسي", "categorie": "manger", "arasaac": "couscous", "emoji": "🍲" },
+  { "id": "brik", "mot": "brik", "motAr": "بريك", "categorie": "manger", "emoji": "🥟" },
+  { "id": "lablabi", "mot": "lablabi", "motAr": "لبلابي", "categorie": "manger", "emoji": "🥣" },
+  { "id": "makrouna", "mot": "makrouna", "motAr": "مقرونة", "categorie": "manger", "arasaac": "pâtes", "emoji": "🍝" },
+  { "id": "bidh", "mot": "bidh", "motAr": "بيض", "categorie": "manger", "arasaac": "œuf", "emoji": "🥚" },
+  { "id": "fakya", "mot": "fakya", "motAr": "فاكية", "categorie": "manger", "arasaac": "fruit", "emoji": "🍎" },
+  { "id": "chkalata", "mot": "chkalata", "motAr": "شكلاطة", "categorie": "manger", "arasaac": "chocolat", "emoji": "🍫" },
+
+  { "id": "ma", "mot": "ma", "motAr": "ماء", "categorie": "boire", "arasaac": "eau", "emoji": "💧" },
+  { "id": "hlib", "mot": "hlib", "motAr": "حليب", "categorie": "boire", "arasaac": "lait", "emoji": "🥛" },
+  { "id": "3asir", "mot": "3asir", "motAr": "عصير", "categorie": "boire", "arasaac": "jus", "emoji": "🧃" },
+  { "id": "nochrob", "mot": "nochrob", "motAr": "نشرب", "categorie": "boire", "arasaac": "boire", "emoji": "🥤" },
+
+  { "id": "toilette", "mot": "toilette", "motAr": "طواليت", "categorie": "besoins", "arasaac": "toilettes", "emoji": "🚽" },
+  { "id": "youja3ni", "mot": "youja3ni", "motAr": "يوجعني", "categorie": "besoins", "arasaac": "douleur", "emoji": "🤕" },
+  { "id": "nor9od", "mot": "nor9od", "motAr": "نرقد", "categorie": "besoins", "arasaac": "dormir", "emoji": "😴" },
+  { "id": "3atchan", "mot": "3atchan", "motAr": "عطشان", "categorie": "besoins", "arasaac": "soif", "emoji": "🫗" },
+  { "id": "ji3an", "mot": "ji3an", "motAr": "جيعان", "categorie": "besoins", "arasaac": "faim", "emoji": "🍴" },
+  { "id": "3awenni", "mot": "3awenni", "motAr": "عاوني", "categorie": "besoins", "arasaac": "aider", "emoji": "🙋" },
+
+  { "id": "farhan", "mot": "farhan", "motAr": "فرحان", "categorie": "emotions", "arasaac": "content", "emoji": "😀" },
+  { "id": "hzin", "mot": "hzin", "motAr": "حزين", "categorie": "emotions", "arasaac": "triste", "emoji": "😢" },
+  { "id": "mghachech", "mot": "mghachech", "motAr": "مغشّش", "categorie": "emotions", "arasaac": "fâché", "emoji": "😠" },
+  { "id": "khayef", "mot": "khayef", "motAr": "خايف", "categorie": "emotions", "arasaac": "peur", "emoji": "😨" },
+  { "id": "ta3ban", "mot": "ta3ban", "motAr": "تعبان", "categorie": "emotions", "arasaac": "fatigué", "emoji": "😩" },
+  { "id": "nhebek", "mot": "nhebek", "motAr": "نحبّك", "categorie": "emotions", "arasaac": "aimer", "emoji": "❤️" },
+
+  { "id": "nheb", "mot": "nheb", "motAr": "نحب", "categorie": "actions", "arasaac": "vouloir", "emoji": "👉" },
+  { "id": "manhebech", "mot": "ma nhebech", "motAr": "ما نحبش", "categorie": "actions", "arasaac": "ne pas vouloir", "emoji": "✋" },
+  { "id": "nemchi", "mot": "nemchi", "motAr": "نمشي", "categorie": "actions", "arasaac": "aller", "emoji": "🚶" },
+  { "id": "nal3eb", "mot": "nal3eb", "motAr": "نلعب", "categorie": "actions", "arasaac": "jouer", "emoji": "🧸" },
+  { "id": "zid", "mot": "zid", "motAr": "زيد", "categorie": "actions", "arasaac": "encore", "emoji": "➕" },
+  { "id": "kammalt", "mot": "kammalt", "motAr": "كمّلت", "categorie": "actions", "arasaac": "fini", "emoji": "✅" },
+  { "id": "a3tini", "mot": "a3tini", "motAr": "اعطيني", "categorie": "actions", "arasaac": "donner", "emoji": "🤲" },
+
+  { "id": "dar", "mot": "dar", "motAr": "دار", "categorie": "lieux", "arasaac": "maison", "emoji": "🏠" },
+  { "id": "madrsa", "mot": "madrsa", "motAr": "مدرسة", "categorie": "lieux", "arasaac": "école", "emoji": "🏫" },
+  { "id": "jnina", "mot": "jnina", "motAr": "جنينة", "categorie": "lieux", "arasaac": "jardin", "emoji": "🌳" },
+  { "id": "bhar", "mot": "bhar", "motAr": "بحر", "categorie": "lieux", "arasaac": "plage", "emoji": "🏖️" },
+  { "id": "souk", "mot": "souk", "motAr": "سوق", "categorie": "lieux", "arasaac": "marché", "emoji": "🛒" },
+  { "id": "karhba", "mot": "karhba", "motAr": "كرهبة", "categorie": "lieux", "arasaac": "voiture", "emoji": "🚗" },
+
+  { "id": "mama", "mot": "mama", "motAr": "ماما", "categorie": "personnes", "arasaac": "mère", "emoji": "👩" },
+  { "id": "baba", "mot": "baba", "motAr": "بابا", "categorie": "personnes", "arasaac": "père", "emoji": "👨" },
+  { "id": "khouya", "mot": "khouya", "motAr": "خويا", "categorie": "personnes", "arasaac": "frère", "emoji": "👦" },
+  { "id": "okhti", "mot": "okhti", "motAr": "أختي", "categorie": "personnes", "arasaac": "sœur", "emoji": "👧" },
+  { "id": "jadda", "mot": "jadda", "motAr": "جدّة", "categorie": "personnes", "arasaac": "grand-mère", "emoji": "👵" },
+  { "id": "ena", "mot": "ena", "motAr": "أنا", "categorie": "personnes", "arasaac": "moi", "emoji": "🙂" }
+]

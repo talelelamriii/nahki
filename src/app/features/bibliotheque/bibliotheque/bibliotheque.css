@@ -1,0 +1,16 @@
+.haut { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-4); }
+.haut p { margin-top: var(--space-2); }
+.astuce { margin-bottom: var(--space-6); padding: 10px var(--space-4); border-radius: var(--radius-sm); background: var(--card); font-size: 14px; }
+.outils { display: flex; flex-direction: column; gap: var(--space-4); margin-bottom: var(--space-6); }
+.recherche .field__input { width: min(100%, 420px); border-radius: var(--radius-pill); }
+.filtres { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.alerte { padding: var(--space-4); border-radius: var(--radius-sm); background: var(--danger-soft); color: var(--danger); font-weight: 700; }
+
+.grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--space-4); }
+.carte { display: flex; flex-direction: column; gap: var(--space-2); padding: var(--space-4); background: var(--card); border: 3px solid var(--cat); border-radius: var(--radius-lg); }
+.carte__image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-sm); background: var(--surface); }
+.carte__texte { display: flex; flex-direction: column; }
+.carte__mot { font-size: 20px; }
+.carte__actions { display: flex; gap: var(--space-2); align-items: center; margin-top: auto; }
+.carte__actions .btn { flex: 1; }
+.ecouter { width: 36px; height: 36px; flex: none; border: 0; border-radius: 50%; background: var(--play); color: var(--on-ink); cursor: pointer; }

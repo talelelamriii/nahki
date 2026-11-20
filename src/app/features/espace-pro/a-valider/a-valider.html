@@ -1,0 +1,43 @@
+<section class="page">
+  <h1>Espace pro : à valider</h1>
+  <p class="muted sous-titre">
+    {{ propositions().length }} proposition{{ propositions().length > 1 ? 's' : '' }} en attente.
+    À vérifier : aucun visage ni enfant, image claire avec un seul objet, mot et catégorie corrects, voix audible.
+  </p>
+
+  @switch (etat()) {
+    @case ('chargement') { <p class="muted">Chargement…</p> }
+    @case ('erreur') { <p class="muted">Impossible de charger les propositions.</p> }
+    @default {
+      <div class="liste">
+        @for (p of propositions(); track p.id) {
+          <article class="fiche card">
+            <img [src]="p.imageUrl" [alt]="'Image proposée : ' + p.mot" class="fiche__image" />
+            <div class="fiche__infos">
+              <h2>{{ p.mot }} @if (p.motAr) { <span lang="ar" class="muted">· {{ p.motAr }}</span> }</h2>
+              <p class="muted">{{ libelle(p.categorie) }} · proposé le {{ p.creeLe | date: 'dd/MM/yyyy' }}</p>
+              @if (p.sonUrl) {
+                <button type="button" class="btn btn--small" (click)="ecouter(p)">▶ Écouter la voix</button>
+              } @else {
+                <p class="muted">Pas de voix enregistrée.</p>
+              }
+              <label class="field">
+                <span class="field__label">Motif (seulement si refus)</span>
+                <select class="field__input" [value]="motifs()[p.id] ?? ''" (change)="choisirMotif(p.id, $any($event.target).value)">
+                  <option value="">Choisir un motif…</option>
+                  @for (m of listeMotifs; track m) { <option [value]="m">{{ m }}</option> }
+                </select>
+              </label>
+              <div class="fiche__boutons">
+                <button type="button" class="btn btn--danger" (click)="decider(p, 'refuse')" [disabled]="enCours() === p.id">Refuser</button>
+                <button type="button" class="btn btn--primary" (click)="decider(p, 'publie')" [disabled]="enCours() === p.id">Valider</button>
+              </div>
+            </div>
+          </article>
+        } @empty {
+          <p class="card">Aucune proposition en attente. Tout est à jour.</p>
+        }
+      </div>
+    }
+  }
+</section>

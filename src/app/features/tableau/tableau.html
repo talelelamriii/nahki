@@ -1,0 +1,31 @@
+<div class="tableau">
+  <app-sentence-bar
+    [phrase]="phrase()"
+    [lectureIndex]="lectureIndex()"
+    (lire)="lire()"
+    (effacer)="effacerDernier()"
+    (toutEffacer)="toutEffacer()"
+  />
+
+  <app-category-tabs [active]="categorie()" (choisir)="categorie.set($event)" />
+
+  @if (erreur()) {
+    <p class="message">Les pictogrammes n'ont pas pu être chargés. Vérifiez la connexion puis rechargez la page.</p>
+  } @else if (!charge()) {
+    <p class="message">Chargement…</p>
+  } @else {
+    <div class="grille" role="tabpanel">
+      @for (p of grille(); track p.id) {
+        <app-picto-card [picto]="p" (toucher)="toucher($event)" />
+      }
+      <button type="button" class="ajouter" (click)="ajouter()" aria-label="Ajouter un picto (espace parent)">
+        <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 6v28M6 20h28" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>
+        <span>ajouter</span>
+      </button>
+    </div>
+  }
+
+  <button type="button" class="cadenas" (click)="espaceParent()" aria-label="Espace parent">
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+  </button>
+</div>

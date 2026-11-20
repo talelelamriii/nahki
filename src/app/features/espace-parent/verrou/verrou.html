@@ -1,0 +1,26 @@
+<div class="fond">
+  <section class="fenetre" role="dialog" aria-modal="true" aria-labelledby="titre-verrou">
+    <svg class="fenetre__cadenas" width="36" height="36" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.4"/></svg>
+    <h1 id="titre-verrou">Espace parent</h1>
+    <p class="consigne">Pour continuer, touchez {{ noms[cible()] }}.</p>
+
+    <div class="formes">
+      @for (f of formes(); track f) {
+        <button type="button" class="forme" (click)="choisir(f)" [attr.aria-label]="noms[f]">
+          @switch (f) {
+            @case ('cercle') { <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="16"/></svg> }
+            @case ('triangle') { <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 7 42 40H6z"/></svg> }
+            @case ('carre') { <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="9" y="9" width="30" height="30" rx="2"/></svg> }
+            @case ('etoile') { <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 5l5.6 12.2 13.3 1.5-9.9 9 2.7 13.1L24 34.2l-11.7 6.6L15 27.7l-9.9-9 13.3-1.5z"/></svg> }
+          }
+        </button>
+      }
+    </div>
+
+    @if (erreur()) {
+      <p class="erreur" role="alert">Ce n'est pas la bonne forme. Lisez la consigne et réessayez.</p>
+    }
+    <p class="muted aide">Une consigne écrite : l'enfant qui ne lit pas encore ne peut pas entrer.</p>
+    <button type="button" class="btn" (click)="annuler()">Annuler</button>
+  </section>
+</div>

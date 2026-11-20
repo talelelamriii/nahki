@@ -1,0 +1,35 @@
+<section class="page">
+  <div class="hero">
+    <div class="hero__texte">
+      <h1 class="hero__titre">Un tableau qui parle en derja</h1>
+      <p class="hero__sous-titre">pour les enfants qui ne parlent pas</p>
+      <p class="muted">
+        Nahki aide les enfants non verbaux à dire leurs besoins et leurs émotions en touchant des images.
+        Gratuit, sans compte pour le tableau, sur tablette ou smartphone.
+      </p>
+      <div class="hero__actions">
+        <a routerLink="/tableau" class="btn btn--primary">Ouvrir le tableau</a>
+        <a routerLink="/bibliotheque" class="btn">Voir la bibliothèque</a>
+      </div>
+      <p class="hero__astuce">
+        Astuce : ajoutez Nahki à l'écran d'accueil de la tablette, il s'ouvrira directement sur le tableau.
+      </p>
+    </div>
+    <div class="hero__apercu" aria-hidden="true">
+      @for (c of ['var(--cat-manger)', 'var(--cat-emotions)', 'var(--cat-actions)', 'var(--cat-lieux)', 'var(--cat-besoins)', 'var(--cat-photos)']; track $index) {
+        <span class="hero__case" [style.border-color]="c"></span>
+      }
+    </div>
+  </div>
+
+  <div class="profils">
+    @for (p of profils; track p.titre) {
+      <article class="card profil">
+        <span class="profil__icone" [style.background]="p.couleur" aria-hidden="true">{{ p.emoji }}</span>
+        <h2>{{ p.titre }}</h2>
+        <p class="muted">{{ p.texte }}</p>
+        <a [routerLink]="p.lien" class="profil__lien">{{ p.action }} →</a>
+      </article>
+    }
+  </div>
+</section>

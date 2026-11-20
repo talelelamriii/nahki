@@ -1,0 +1,32 @@
+.tableau {
+  min-height: 100dvh;
+  display: flex; flex-direction: column; gap: var(--space-4);
+  padding: var(--space-4) var(--space-6) var(--space-8);
+  background: var(--surface);
+}
+
+/* Tablette : 5 colonnes ; smartphone : 3 colonnes */
+.grille { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--picto-card), 1fr)); gap: var(--space-4); }
+
+.ajouter {
+  min-height: var(--picto-card);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-2);
+  border: 3px dashed var(--line-strong); border-radius: var(--radius-lg);
+  background: var(--card); color: var(--ink-muted);
+  font: 700 22px/26px var(--font-display); cursor: pointer;
+}
+
+.cadenas {
+  position: fixed; right: var(--space-4); bottom: var(--space-4);
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  border: 2px solid var(--line); background: var(--card); color: var(--ink-muted); cursor: pointer;
+}
+
+.message { padding: var(--space-8); text-align: center; color: var(--ink-muted); }
+
+@media (max-width: 600px) {
+  .tableau { padding: var(--space-2) var(--space-4) 72px; gap: var(--space-2); }
+  .grille { grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+  .ajouter { min-height: 112px; font-size: 17px; }
+}

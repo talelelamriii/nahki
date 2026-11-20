@@ -1,0 +1,55 @@
+<header class="haut">
+  <h1>Mes pictos</h1>
+  <a routerLink="../ajouter" class="btn btn--primary">+ Ajouter un picto</a>
+</header>
+
+<div class="filtres" role="group" aria-label="Filtrer par catégorie">
+  <button type="button" class="chip" [attr.aria-pressed]="filtre() === 'tous'" (click)="filtre.set('tous')">Tous</button>
+  @for (c of categories; track c.id) {
+    <button type="button" class="chip" [attr.aria-pressed]="filtre() === c.id" (click)="filtre.set(c.id)">{{ c.libelle }}</button>
+  }
+</div>
+
+<ul class="liste">
+  @for (p of liste(); track p.id) {
+    <li class="ligne" [class.ligne--masque]="pictos.estMasque(p.id)">
+      <app-picto-card [picto]="p" taille="mini" [decorative]="true" />
+      <div class="ligne__mot">
+        <strong>{{ p.mot }}</strong>
+        <span class="muted">{{ libelle(p) }} · {{ p.origine === 'base' ? 'picto de base' : 'ma photo' }}</span>
+      </div>
+
+      <label class="interrupteur">
+        <input type="checkbox" [checked]="!pictos.estMasque(p.id)" (change)="pictos.basculerMasque(p.id)" />
+        <span class="interrupteur__piste" aria-hidden="true"></span>
+        <span class="interrupteur__texte">{{ pictos.estMasque(p.id) ? 'Masqué' : 'Visible' }}</span>
+      </label>
+
+      <div class="ligne__actions">
+        @if (partageable(p)) {
+          @if (bibliotheque.envoyes().has(p.id)) {
+            <span class="badge badge--envoye">Envoyé ✓</span>
+          } @else {
+            <button type="button" class="btn btn--small" (click)="partager(p)" [disabled]="envoiEnCours() === p.id">
+              {{ envoiEnCours() === p.id ? 'Envoi…' : 'Partager' }}
+            </button>
+          }
+        } @else if (p.origine === 'famille') {
+          <span class="badge">🔒 Privé</span>
+        }
+        @if (p.origine === 'famille') {
+          @if (aSupprimer() === p.id) {
+            <button type="button" class="btn btn--small btn--danger" (click)="confirmerSuppression(p)">Confirmer</button>
+            <button type="button" class="btn btn--small" (click)="aSupprimer.set(null)">Annuler</button>
+          } @else {
+            <button type="button" class="btn btn--small btn--danger" (click)="aSupprimer.set(p.id)">Supprimer</button>
+          }
+        }
+      </div>
+    </li>
+  } @empty {
+    <li class="muted">Aucun picto dans cette catégorie.</li>
+  }
+</ul>
+
+<p class="muted note">Partager : vos photos d'objets, de plats et de lieux. Les photos de personnes restent privées sur cet appareil.</p>

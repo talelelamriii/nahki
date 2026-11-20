@@ -1,0 +1,27 @@
+<div class="voix">
+  @switch (etat()) {
+    @case ('pret') {
+      <button type="button" class="micro" (click)="demarrer()" aria-label="Enregistrer le mot">
+        <span class="micro__point"></span>
+      </button>
+      <div>
+        <p class="voix__titre">Appuyer pour enregistrer</p>
+        <p class="muted">Dites le mot comme à la maison (5 secondes max.).</p>
+      </div>
+    }
+    @case ('enregistrement') {
+      <button type="button" class="micro micro--actif" (click)="arreter()" aria-label="Arrêter l'enregistrement">
+        <span class="micro__carre"></span>
+      </button>
+      <p class="voix__titre">Enregistrement… appuyez pour arrêter</p>
+    }
+    @case ('enregistre') {
+      <button type="button" class="btn btn--small" (click)="ecouter()">▶ Écouter</button>
+      <button type="button" class="btn btn--small" (click)="demarrer()">Recommencer</button>
+      <button type="button" class="btn btn--small btn--danger" (click)="supprimer()">Supprimer</button>
+    }
+    @case ('impossible') {
+      <p class="muted">Micro indisponible : la voix par défaut sera utilisée. Vérifiez l'autorisation du micro dans le navigateur.</p>
+    }
+  }
+</div>

@@ -1,0 +1,50 @@
+:host { display: flex; flex-direction: column; min-height: 100dvh; }
+main { flex: 1; }
+
+.entete {
+  display: flex; align-items: center; gap: var(--space-6);
+  padding: var(--space-2) var(--space-6); min-height: 64px;
+  background: var(--card); border-bottom: 1px solid var(--line);
+}
+.logo { display: flex; align-items: baseline; gap: var(--space-2); text-decoration: none; }
+.logo__latin { font: 700 26px/1 var(--font-display); color: var(--ink); }
+.logo__arabe { font: 700 20px/1 var(--font-display); color: var(--logo-ar); }
+
+.nav { display: flex; gap: var(--space-6); margin-left: auto; }
+.nav__lien { padding: 18px 0; text-decoration: none; color: var(--ink-muted); font-weight: 700; border-bottom: 3px solid transparent; }
+.nav__lien--actif { color: var(--ink); border-bottom-color: var(--ink); }
+
+.compte { position: relative; }
+.compte__nom {
+  display: flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 var(--space-4);
+  border: 2px solid var(--line-strong); border-radius: var(--radius-pill);
+  font-weight: 700; cursor: pointer; list-style: none;
+}
+.compte__nom::-webkit-details-marker { display: none; }
+.compte__nom::after { content: '▾'; }
+.compte__menu {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 20; min-width: 200px;
+  display: flex; flex-direction: column; padding: 6px;
+  background: var(--card); border: 1px solid var(--line-strong); border-radius: var(--radius-md); box-shadow: var(--shadow-card);
+}
+.compte__menu a, .compte__menu button {
+  min-height: 40px; padding: 0 12px; display: flex; align-items: center;
+  border: 0; border-radius: var(--radius-sm); background: none; color: var(--ink);
+  font: 700 15px/1 var(--font-text); text-decoration: none; text-align: left; cursor: pointer;
+}
+.compte__menu button { color: var(--ink-muted); font-weight: 400; }
+.compte__menu a:hover, .compte__menu button:hover { background: var(--surface); }
+
+.pied {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-4);
+  padding: var(--space-4) var(--space-6); background: var(--card); border-top: 1px solid var(--line);
+  font-size: 14px; color: var(--ink-muted);
+}
+.pied nav { display: flex; gap: var(--space-6); flex-wrap: wrap; }
+
+@media (max-width: 700px) {
+  .entete { flex-wrap: wrap; padding: var(--space-2) var(--space-4); gap: 0 var(--space-4); }
+  .nav { order: 3; width: 100%; margin: 0; gap: var(--space-4); overflow-x: auto; }
+  .nav__lien { padding: 10px 0; }
+  .entete .btn, .compte { margin-left: auto; }
+}

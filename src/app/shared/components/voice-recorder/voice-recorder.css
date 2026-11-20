@@ -1,0 +1,11 @@
+.voix { display: flex; align-items: center; gap: var(--space-4); flex-wrap: wrap; }
+.voix__titre { font-weight: 700; }
+
+.micro {
+  width: 56px; height: 56px; flex: none; border: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--ink); cursor: pointer;
+}
+.micro--actif { background: var(--danger); }
+.micro__point { width: 18px; height: 18px; border-radius: 50%; background: var(--on-ink); }
+.micro__carre { width: 18px; height: 18px; border-radius: 3px; background: var(--on-ink); }

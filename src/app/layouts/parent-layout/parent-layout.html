@@ -1,0 +1,19 @@
+<div class="espace">
+  <nav class="menu" aria-label="Espace parent">
+    <p class="menu__titre">Espace parent</p>
+    @for (m of menu; track m.url) {
+      <a [routerLink]="m.url" routerLinkActive="menu__lien--actif" class="menu__lien">
+        <span class="menu__icone" aria-hidden="true">{{ m.icone }}</span>{{ m.libelle }}
+      </a>
+    }
+    <hr class="menu__separateur" />
+    <p class="menu__sous-titre">Sur le site Nahki</p>
+    <a routerLink="/bibliotheque" class="menu__lien menu__lien--site">Bibliothèque partagée →</a>
+    <a routerLink="/" class="menu__lien menu__lien--site">Accueil du site →</a>
+    <button type="button" class="btn menu__retour" (click)="retourTableau()">← Retour au tableau</button>
+  </nav>
+
+  <main class="contenu">
+    <router-outlet />
+  </main>
+</div>

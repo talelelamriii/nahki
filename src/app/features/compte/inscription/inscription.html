@@ -1,0 +1,57 @@
+<section class="page compte">
+  @if (attenteEmail()) {
+    <div class="card compte__carte">
+      <h1>Vérifiez vos e-mails</h1>
+      <p>Un lien de confirmation vient d'être envoyé. Cliquez dessus, puis connectez-vous.</p>
+      <a routerLink="/connexion" class="btn btn--primary">Aller à la connexion</a>
+    </div>
+  } @else {
+    <form class="card compte__carte" [formGroup]="form" (ngSubmit)="inscrire()" novalidate>
+      <h1>Créer un compte parent</h1>
+      <p class="muted">Pour partager des pictos avec les autres familles.</p>
+
+      @if (!configure) {
+        <p class="compte__erreur" role="alert">Le backend n'est pas encore configuré (voir le README).</p>
+      }
+
+      <label class="field" [class.field--error]="invalide('prenom')">
+        <span class="field__label">Prénom</span>
+        <input class="field__input" formControlName="prenom" autocomplete="given-name" placeholder="ex. Leïla" />
+        @if (invalide('prenom')) { <span class="field__error">Entrez votre prénom.</span> }
+      </label>
+
+      <label class="field" [class.field--error]="invalide('email')">
+        <span class="field__label">Adresse e-mail</span>
+        <input class="field__input" type="email" formControlName="email" autocomplete="email" placeholder="nom@exemple.tn" />
+        @if (invalide('email')) { <span class="field__error">Entrez une adresse e-mail valide.</span> }
+      </label>
+
+      <label class="field" [class.field--error]="invalide('motDePasse')">
+        <span class="field__label">Mot de passe</span>
+        <input class="field__input" type="password" formControlName="motDePasse" autocomplete="new-password" />
+        @if (invalide('motDePasse')) {
+          <span class="field__error">8 caractères minimum.</span>
+        } @else {
+          <span class="field__help">8 caractères minimum.</span>
+        }
+      </label>
+
+      <label class="compte__case">
+        <input type="checkbox" formControlName="regles" />
+        <span>J'accepte les règles de la bibliothèque : aucun visage ni photo d'enfant, seulement des objets, des plats et des lieux.</span>
+      </label>
+      @if (invalide('regles')) { <span class="field__error">Acceptez les règles pour continuer.</span> }
+
+      @if (erreur(); as e) {
+        <p class="compte__erreur" role="alert">{{ e }}</p>
+      }
+
+      <button type="submit" class="btn btn--primary" [disabled]="envoi() || !configure">
+        {{ envoi() ? 'Création…' : 'Créer mon compte' }}
+      </button>
+
+      <p class="compte__info">Le tableau reste utilisable sans compte : le compte sert seulement à partager.</p>
+      <a routerLink="/connexion" class="muted">Déjà inscrit ? Se connecter</a>
+    </form>
+  }
+</section>

@@ -1,0 +1,21 @@
+<div class="barre">
+  <div class="barre__phrase" aria-live="polite" aria-label="Phrase en cours">
+    @for (p of phrase(); track $index) {
+      <app-picto-card [picto]="p" taille="mini" [active]="$index === lectureIndex()" [decorative]="true" />
+    } @empty {
+      <span class="barre__vide">Touche les images pour faire une phrase</span>
+    }
+  </div>
+
+  <button type="button" class="outil" (click)="effacer.emit()" [disabled]="!phrase().length" aria-label="Effacer le dernier mot">
+    <svg width="28" height="20" viewBox="0 0 28 20" aria-hidden="true"><path d="M9 2h17v16H9L2 10z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><path d="M14 7l6 6M20 7l-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <span>effacer</span>
+  </button>
+  <button type="button" class="outil" (click)="toutEffacer.emit()" [disabled]="!phrase().length" aria-label="Tout effacer">
+    <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4 4 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+    <span>tout</span>
+  </button>
+  <button type="button" class="lire" (click)="lire.emit()" [disabled]="!phrase().length" aria-label="Lire la phrase">
+    <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><path d="M13 8 32 20 13 32z" fill="currentColor"/></svg>
+  </button>
+</div>
