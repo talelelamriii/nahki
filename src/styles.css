@@ -126,3 +126,58 @@ img { max-width: 100%; display: block; }
 }
 .page { max-width: 1100px; margin: 0 auto; padding: var(--space-8) var(--space-6); }
 @media (max-width: 600px) { .page { padding: var(--space-6) var(--space-4); } }
+
+/* =====================================================================
+   Objectif 4 : finition UX
+   ===================================================================== */
+
+/* ---------- Transitions légères des contrôles ---------- */
+.btn, .chip, .field__input {
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+.btn:not(:disabled):hover { box-shadow: 0 3px 10px rgba(31, 42, 68, 0.15); }
+.btn:not(:disabled):active, .chip:active { transform: scale(0.97); }
+.chip:hover { border-color: var(--ink); }
+.field__input:focus { border-color: var(--ink); outline: none; box-shadow: 0 0 0 3px rgba(31, 42, 68, 0.15); }
+
+/* ---------- Apparition douce d'un contenu chargé ---------- */
+.apparition { animation: nahki-apparition 0.25s ease both; }
+@keyframes nahki-apparition { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Squelettes de chargement (skeleton) ---------- */
+.skeleton {
+  display: block; border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--line) 0%, var(--surface) 50%, var(--line) 100%);
+  background-size: 200% 100%;
+  animation: nahki-skeleton 1.2s ease-in-out infinite;
+}
+@keyframes nahki-skeleton { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+/* ---------- Indicateur de chargement (spinner) ---------- */
+.spinner {
+  display: inline-block; width: 18px; height: 18px; flex: none;
+  border: 3px solid currentColor; border-right-color: transparent; border-radius: 50%;
+  animation: nahki-rotation 0.7s linear infinite;
+}
+@keyframes nahki-rotation { to { transform: rotate(360deg); } }
+
+/* ---------- Transition entre les pages (View Transitions API) ---------- */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: 0.18s; }
+
+/* ---------- Mouvement réduit : on coupe animations et transitions ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+}
+
+/* Lignes de squelette pour les listes (Mes propositions, Espace pro) */
+.squelettes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-4); }
+.squelette-ligne { display: flex; gap: var(--space-4); align-items: center; padding: var(--space-4); background: var(--card); border-radius: var(--radius-lg); }
+.squelette-ligne__image { width: 72px; height: 72px; flex: none; }
+.squelette-ligne__textes { flex: 1; display: flex; flex-direction: column; gap: var(--space-2); }
+.squelette-ligne__texte { height: 18px; width: 70%; }

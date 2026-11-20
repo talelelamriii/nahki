@@ -12,9 +12,13 @@
   @if (erreur()) {
     <p class="message">Les pictogrammes n'ont pas pu être chargés. Vérifiez la connexion puis rechargez la page.</p>
   } @else if (!charge()) {
-    <p class="message">Chargement…</p>
+    <div class="grille" aria-busy="true" aria-label="Chargement des pictogrammes">
+      @for (i of [1, 2, 3, 4, 5, 6, 7, 8]; track i) {
+        <div class="skeleton case-squelette"></div>
+      }
+    </div>
   } @else {
-    <div class="grille" role="tabpanel">
+    <div class="grille apparition" role="tabpanel">
       @for (p of grille(); track p.id) {
         <app-picto-card [picto]="p" (toucher)="toucher($event)" />
       }

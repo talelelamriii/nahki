@@ -17,7 +17,7 @@ export const routes: Routes = [
     children: [
       { path: '', title: 'Nahki', loadComponent: () => import('./features/accueil/accueil').then((m) => m.Accueil) },
       { path: 'bibliotheque', title: 'Bibliothèque – Nahki', loadComponent: () => import('./features/bibliotheque/bibliotheque/bibliotheque').then((m) => m.Bibliotheque) },
-      { path: 'bibliotheque/:id', title: 'Fiche picto – Nahki', loadComponent: aVenir, data: { titre: 'Fiche picto', ecran: '07', vague: 2 } },
+      { path: 'bibliotheque/:id', title: 'Fiche picto – Nahki', loadComponent: () => import('./features/bibliotheque/fiche-picto/fiche-picto').then((m) => m.FichePicto) },
       { path: 'connexion', title: 'Connexion – Nahki', loadComponent: () => import('./features/compte/connexion/connexion').then((m) => m.Connexion) },
       { path: 'inscription', title: 'Inscription – Nahki', loadComponent: () => import('./features/compte/inscription/inscription').then((m) => m.Inscription) },
       { path: 'mes-propositions', title: 'Mes propositions – Nahki', canActivate: [authGuard], loadComponent: () => import('./features/bibliotheque/mes-propositions/mes-propositions').then((m) => m.MesPropositions) },

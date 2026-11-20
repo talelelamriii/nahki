@@ -27,19 +27,31 @@
   </div>
 
   @switch (etat()) {
-    @case ('chargement') { <p class="muted">Chargement…</p> }
+    @case ('chargement') {
+      <div class="grille" aria-busy="true" aria-label="Chargement de la bibliothèque">
+        @for (i of [1, 2, 3, 4, 5, 6]; track i) {
+          <div class="carte carte--squelette">
+            <div class="skeleton carte__image"></div>
+            <div class="skeleton skeleton--texte"></div>
+            <div class="skeleton skeleton--texte" style="width: 50%"></div>
+          </div>
+        }
+      </div>
+    }
     @case ('non-configure') { <p class="alerte">Le backend Supabase n'est pas encore configuré (voir le README).</p> }
     @case ('erreur') { <p class="alerte">La bibliothèque n'a pas pu être chargée. Vérifiez la connexion internet.</p> }
     @default {
       <div class="grille">
         @for (p of affiches(); track p.id) {
-          <article class="carte" [style.--cat]="couleur(p.categorie)">
-            <img class="carte__image" [src]="p.imageUrl" [alt]="p.mot" loading="lazy" />
-            <div class="carte__texte">
-              <h2 class="carte__mot">{{ p.mot }}</h2>
-              @if (p.motAr) { <span lang="ar" dir="rtl">{{ p.motAr }}</span> }
-              <span class="muted">{{ libelle(p.categorie) }}</span>
-            </div>
+          <article class="carte apparition" [style.--cat]="couleur(p.categorie)">
+            <a class="carte__lien" [routerLink]="['/bibliotheque', p.id]">
+              <img class="carte__image" [src]="p.imageUrl" alt="" loading="lazy" />
+              <div class="carte__texte">
+                <h2 class="carte__mot">{{ p.mot }}</h2>
+                @if (p.motAr) { <span lang="ar" dir="rtl">{{ p.motAr }}</span> }
+                <span class="muted">{{ libelle(p.categorie) }}</span>
+              </div>
+            </a>
             <div class="carte__actions">
               @if (p.sonUrl) {
                 <button type="button" class="ecouter" (click)="ecouter(p)" [attr.aria-label]="'Écouter ' + p.mot">▶</button>

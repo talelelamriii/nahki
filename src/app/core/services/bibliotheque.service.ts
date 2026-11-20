@@ -46,6 +46,31 @@ export class BibliothequeService {
     return this.lister('statut', 'en_attente', true);
   }
 
+  /**
+   * Écran 07 : un seul picto, par son identifiant.
+   * Les règles d'accès ne renvoient que les pictos publiés, ceux de l'auteur, ou tout pour un orthophoniste :
+   * `null` veut dire « introuvable ou pas visible ».
+   */
+  async parId(id: string): Promise<PictoPartage | null> {
+    const { data, error } = await this.supabase.client.from('pictos_partages').select(COLONNES).eq('id', id).maybeSingle();
+    if (error) throw error;
+    return data ? this.versPicto(data as LignePictoPartage) : null;
+  }
+
+  /** Écran 07 : quelques autres pictos publiés de la même catégorie. */
+  async memeCategorie(p: PictoPartage, nombre = 4): Promise<PictoPartage[]> {
+    const { data, error } = await this.supabase.client
+      .from('pictos_partages')
+      .select(COLONNES)
+      .eq('statut', 'publie')
+      .eq('categorie', p.categorie)
+      .neq('id', p.id)
+      .order('cree_le', { ascending: false })
+      .limit(nombre);
+    if (error) throw error;
+    return (data as LignePictoPartage[]).map((l) => this.versPicto(l));
+  }
+
   // ---------- Écriture ----------
 
   /** Bouton « Partager » de Mes pictos : envoie la photo, la voix et le mot, avec le statut « en attente ». */

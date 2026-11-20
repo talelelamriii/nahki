@@ -1,0 +1,80 @@
+<section class="page">
+  <a routerLink="/bibliotheque" class="retour">← Retour à la bibliothèque</a>
+
+  @switch (etat()) {
+    @case ('chargement') {
+      <div class="fiche" aria-busy="true" aria-label="Chargement du picto">
+        <div class="skeleton fiche__image"></div>
+        <div class="fiche__infos">
+          <div class="skeleton skeleton--titre"></div>
+          <div class="skeleton skeleton--ligne"></div>
+          <div class="skeleton skeleton--ligne" style="width: 40%"></div>
+        </div>
+      </div>
+    }
+    @case ('non-configure') { <p class="alerte">Le backend Supabase n'est pas encore configuré (voir le README).</p> }
+    @case ('erreur') { <p class="alerte" role="alert">Ce picto n'a pas pu être chargé. Vérifiez la connexion internet.</p> }
+    @case ('introuvable') {
+      <div class="card vide">
+        <h1>Picto introuvable</h1>
+        <p class="muted">Ce picto n'existe pas, ou il n'est pas encore publié.</p>
+        <a routerLink="/bibliotheque" class="btn btn--primary">Voir la bibliothèque</a>
+      </div>
+    }
+    @default {
+      @if (picto(); as p) {
+        <article class="fiche apparition" [style.--cat]="cat()?.couleur">
+          <img class="fiche__image" [src]="p.imageUrl" [alt]="p.mot" />
+
+          <div class="fiche__infos">
+            <span class="etiquette" [class.etiquette--claire]="cat()?.texte === 'on-ink'">{{ cat()?.libelle }}</span>
+            <h1 class="fiche__mot">{{ p.mot }}</h1>
+            @if (p.motAr) {
+              <p class="fiche__ar" lang="ar" dir="rtl">{{ p.motAr }}</p>
+            }
+
+            @if (p.statut !== 'publie') {
+              <p class="statut" [class.statut--refuse]="p.statut === 'refuse'">
+                {{ p.statut === 'en_attente' ? 'En attente de vérification par une orthophoniste' : 'Refusé' + (p.motif ? ' : ' + p.motif : '') }}
+              </p>
+            }
+
+            <div class="fiche__actions">
+              @if (p.sonUrl) {
+                <button type="button" class="btn" (click)="ecouter()" [disabled]="enLecture()">
+                  <span aria-hidden="true">▶</span> {{ enLecture() ? 'Lecture…' : 'Écouter la voix' }}
+                </button>
+              } @else {
+                <p class="muted">Pas de voix enregistrée pour ce picto.</p>
+              }
+              @if (p.statut === 'publie') {
+                <button type="button" class="btn btn--primary" (click)="ajouter()" [disabled]="ajoutEnCours()">
+                  {{ ajoutEnCours() ? 'Ajout…' : '+ À mon tableau' }}
+                </button>
+              }
+            </div>
+
+            <dl class="details">
+              <div><dt>Partagé le</dt><dd>{{ p.creeLe | date: 'd MMMM y' }}</dd></div>
+              <div><dt>Vérifié</dt><dd>{{ p.statut === 'publie' ? 'Oui, par une orthophoniste' : 'Pas encore' }}</dd></div>
+            </dl>
+
+            <p class="muted note">Une image ne convient pas ? <a routerLink="/contact">Signalez-la</a>.</p>
+          </div>
+        </article>
+
+        @if (voisins().length) {
+          <h2 class="voisins__titre">Dans la même catégorie</h2>
+          <div class="voisins">
+            @for (v of voisins(); track v.id) {
+              <a class="voisin" [routerLink]="['/bibliotheque', v.id]" [style.--cat]="couleur(v)">
+                <img [src]="v.imageUrl" alt="" loading="lazy" />
+                <span>{{ v.mot }}</span>
+              </a>
+            }
+          </div>
+        }
+      }
+    }
+  }
+</section>

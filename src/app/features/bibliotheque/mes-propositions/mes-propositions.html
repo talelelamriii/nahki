@@ -3,7 +3,19 @@
   <p class="muted sous-titre">Les pictos que vous avez partagés et leur statut.</p>
 
   @switch (etat()) {
-    @case ('chargement') { <p class="muted">Chargement…</p> }
+    @case ('chargement') {
+      <ul class="squelettes" aria-busy="true" aria-label="Chargement">
+        @for (i of [1, 2, 3]; track i) {
+          <li class="squelette-ligne">
+            <span class="skeleton squelette-ligne__image"></span>
+            <span class="squelette-ligne__textes">
+              <span class="skeleton squelette-ligne__texte"></span>
+              <span class="skeleton squelette-ligne__texte" style="width: 40%"></span>
+            </span>
+          </li>
+        }
+      </ul>
+    }
     @case ('erreur') { <p class="muted">Impossible de charger vos propositions. Vérifiez la connexion internet.</p> }
     @default {
       <ul class="liste">
